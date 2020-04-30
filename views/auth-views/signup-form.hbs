@@ -1,0 +1,40 @@
+<h1>SIGNUP PAGE</h1>
+
+<form id="form" action='/auth/signup' method='POST'>
+
+  <label for=''>Username :</label>
+  <input type='text' name='username' required>
+
+  <label for=''>Password :</label>
+  <input id="myPassword" type='password' name='password' required>
+
+  <label for=''>City :</label>
+  <input type='text' name='city'>
+
+  <label for=''>Country :</label>
+  <input type='text' name='country' required>
+
+   <label for="">Beer Preference:</label>
+  <select id="beer-preference" name="beer-preference" required>
+    <option value="lager">Lager</option>
+    <option value="pilsner">Pilsner</option>
+    <option value="wheat beer">Wheat beer</option>
+    <option value="witbier">Witbier</option>
+    <option value="IPA">IPA</option>
+    <option value="porter">Porter</option>
+    <option value="stout">Stout</option>
+    <option value="gose">Gose</option>
+    <option value="sour">Sour</option>
+    <option value="no preference">No preference</option>
+    
+  </select>
+
+  <button type='submit'>Submit</button>
+</form>
+
+{{!-- Error message display --}}
+{{#if errorMessage}}
+<div class="error-message"> {{errorMessage}} </div>
+{{/if}}
+
+
