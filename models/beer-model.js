@@ -5,7 +5,7 @@ const beerSchema = new Schema({
   authorId: { type: mongoose.ObjectId, ref: "User", required: true },
   name: { type: String, required: true, unique: true },
   image_url: { type: String },
-  beerType: {
+  beerType: [{
     type: String,
     enum: [
         "lager",
@@ -18,9 +18,10 @@ const beerSchema = new Schema({
         "stout",
         "gose",
         "sour",
-        "other",
+        "no preference",
       ],
-  }, // we should give user option to specify!
+  }],
+  brewery:{type:String}, // we should give user option to specify!
   alcoholVol: { type: Number, required: true },
   country: { type: String },
   description: { type: String },

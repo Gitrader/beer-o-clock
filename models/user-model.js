@@ -7,7 +7,7 @@ const userSchema = new Schema({
   profilePicture: { type: String },
   city: { type: String },
   country: { type: String },
-  beerPreference: {
+  beerPreference: [{type:String,    //[multiple selection]
     enum: [
       "lager",
       "pilsner",
@@ -21,7 +21,7 @@ const userSchema = new Schema({
       "sour",
       "no preference",
     ],
-  },
+  }],
   likedBeers: [{ type: mongoose.ObjectId, ref: "Beer", required: true }],
   userBeers: [{ type: mongoose.ObjectId, ref: "Beer", required: true }], // should we add userID here that these can be linked?
   userReviews: [{ type: mongoose.ObjectId, ref: "Review", required: true }],
@@ -32,3 +32,7 @@ const userSchema = new Schema({
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
+
+
+
+//install wrapper for the API punk API js wrapper a way to query the API 

@@ -13,7 +13,13 @@ authRouter.get("/signup", (req, res) => {
 
 authRouter.post("/signup", (req, res, next) => {
   // 1. Get the username and password from req.body
-  const { username, password } = req.body;
+  const { username, password, city, country, beerPreference } = req.body;
+  //   const username = req.body.username
+  //   const password=req.body.password
+  //   const city= req.body.city
+  //   const country= req.body.country
+  // const beerPreference=req.body.beerPreference
+  console.log(req.body);
 
   // 2.1 Check if the username and password are provided
   if (username === "" || password === "") {
@@ -39,7 +45,13 @@ authRouter.post("/signup", (req, res, next) => {
         const hashedPassword = bcrypt.hashSync(password, salt);
 
         // 5. Create new user in DB, saving the encrypted password
-        User.create({ username, password: hashedPassword })
+        User.create({
+          username,
+          password: hashedPassword,
+          city,
+          country,
+          beerPreference,
+        })
           .then((user) => {
             // 6. When the user is created, redirect (we choose - home page)
             res.redirect("/");
