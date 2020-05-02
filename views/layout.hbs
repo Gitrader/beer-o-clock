@@ -16,15 +16,15 @@
       <i class="material-icons nav__icon">dashboard</i>
       <span class="nav__text">All beers</span>
     </a>
-    <a href="views/add-beer" class="nav__link">
+    <a href="/add-beer" class="nav__link">
       <i class="material-icons nav__icon">add</i>
       <span class="nav__text">Add a beer</span>
     </a>
-    <a href="/views/favorite-beers" class="nav__link">
+    <a href="/favorite-beers" class="nav__link">
       <i class="material-icons nav__icon">favorite</i>
       <span class="nav__text">Favorites</span>
     </a>
-    <a href="/views/profile/profile-page" class="nav__link nav__link--active">
+    <a href="/profile/profile-page" class="nav__link nav__link--active">
       <i class="material-icons nav__icon">person</i>
       <span class="nav__text">Profile</span>
     </a>
@@ -34,6 +34,19 @@
   </a> --}}
 
   </nav>
+
+  {{!-- <script>
+
+const header = document.getElementById("nav");
+const navLinks = header.getElementsByClassName("nav__link");
+for (var i = 0; i < navLinks.length; i++) {
+  navLinks[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace("active", "");
+  this.className += " active";
+  });
+}
+</script> --}}
   {{{body}}}
 
 </body>
