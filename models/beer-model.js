@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const beerSchema = new Schema({
   authorId: { type: mongoose.ObjectId, ref: "User", required: true },
   name: { type: String, required: true, unique: true },
+  brewery:{type:String}, // we should give user option to specify!
   image_url: { type: String },
   beerType: [{
     type: String,
@@ -21,7 +22,6 @@ const beerSchema = new Schema({
         "no preference",
       ],
   }],
-  brewery:{type:String}, // we should give user option to specify!
   alcoholVol: { type: Number, required: true },
   country: { type: String },
   description: { type: String },
