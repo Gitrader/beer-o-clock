@@ -111,11 +111,24 @@ authRouter.post("/login", (req, res, next) => {
           req.session.currentUser = user;
 
           // 5. Redirect the user to some page (we choose - home page)
-          res.redirect("/");
-        }
+          console.log(res.redirect)
+          res.redirect("/all-beers");
+        }       
       }
     })
     .catch((err) => console.log(err));
+});
+
+// GET   '/auth/logout'
+authRouter.get("/logout", (req, res) => {
+  // We remove/destroy the session record in the database
+  req.session.destroy((err) => {
+    if (err) {
+      res.render("error", { message: "Something went wrong! Yikes!" });
+    }
+    // Redirect to the page (we choose - home page)
+    res.redirect("/");
+  });
 });
 
 module.exports = authRouter;

@@ -1,4 +1,4 @@
-<form action="/login" method="POST" id="form">
+<form action="/auth/login" method="POST" id="form">
   <h2>Login</h2>
 
   <label for="username">Username</label>
@@ -11,9 +11,9 @@
   <div class="error-message">{{ errorMessage }}</div>
   {{/if}}
 
-  <a><button>Sign in</button></a>
+  <button>Sign in</button>
 
-  {{!-- ADD href --}}
+  
 
   <p class="account-message">
     Don't have an account? <a href="/auth/signup">Sign up</a>

@@ -4,8 +4,8 @@ const isLoggedIn = require('./../middleware/isLoggedIn');
 
 
 // GET              
-siteRouter.get('/main', isLoggedIn, (req, res, next) => {
-  res.render('main');
+siteRouter.get('/all-beers', isLoggedIn, (req, res, next) => {
+  res.render('all-beers');
 })
 
 // GET               
@@ -14,3 +14,4 @@ siteRouter.get('/private', isLoggedIn, (req, res, next) => {
 })
 
 module.exports = siteRouter;
+
