@@ -8,7 +8,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 
-
+require('dotenv').config();
 
 const mongoose = require("mongoose");
 

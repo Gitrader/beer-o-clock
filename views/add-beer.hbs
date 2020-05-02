@@ -1,1 +1,109 @@
 <h1>Add beer page</h1>
+
+<form action="/add-beer" method="POST" enctype="multipart/form-data">
+  
+  {{!-- <label for=''>AuthorId :</label>
+  <input type='text' name='authorId'>  --}}
+
+ <label for=''>Select an image :</label>
+  <input type="file" name="image_url" />
+ 
+
+<label for=''>Beer name :</label>
+  <input type='text' name='name' required>  
+
+
+  <label for="">Beer Type:</label> 
+
+  <select id="beer-type" name="beerType">
+    <option value="lager">Lager</option>
+    <option value="pilsner">Pilsner</option>
+    <option value="wheat beer">Wheat beer</option>
+    <option value="witbier">Witbier</option>
+    <option value="IPA">IPA</option>
+    <option value="porter">Porter</option>
+    <option value="stout">Stout</option>
+    <option value="gose">Gose</option>
+    <option value="sour">Sour</option>
+    
+    </select>
+
+  {{!-- <div>
+    <input type="checkbox" id="lager" name="beerPreference" value="lager">
+    <label for="">Lager</label>
+  </div>
+  <div>
+    <input type="checkbox" id="pilsner" name="beerPreference" value="pilsner">
+    <label for="">Pilsner</label>
+  </div>
+  <div>
+    <input type="checkbox" id="wheat-beer" name="beerPreference" value="wheat beer">
+    <label for="">Wheat beer</label>
+  </div>
+  <div>
+    <input type="checkbox" id="witbier" name="beerPreference" value="witbier">
+    <label for="">Witbier</label>
+  </div>
+  <div>
+    <input type="checkbox" id="IPA" name="beerPreference" value="IPA">
+    <label for="">IPA</label>
+  </div>
+  <div>
+    <input type="checkbox" id="porter" name="beerPreference" value="porter">
+    <label for="">Porter</label>
+  </div>
+  <div>
+    <input type="checkbox" id="stout" name="beerPreference" value="stout">
+    <label for="">Stout</label>
+  </div>
+  <div>
+    <input type="checkbox" id="gose" name="beerPreference" value="gose">
+    <label for="">Gose</label>
+  </div>
+  <div>
+    <input type="checkbox" id="sour" name="beerPreference" value="sour">
+    <label for="">Sour</label>
+  </div>
+   --}}
+   {{!-- <div>
+    <input type="checkbox" id="no-preference" name="beerPreference" value="no preference">
+    <label for="">No preference</label>
+  </div>  --}}
+
+
+<label for=''>Brewery :</label>
+  <input type='text' name='brewery'> 
+
+  <label for=''>Alcohol Volume (%) :</label>
+  <input type='text' name='alcoholVol' required> 
+
+  <label for=''>Country :</label>
+  <input type='text' name='country'>
+
+ <label for=''>Description :</label>
+  <input type='text' name='description'>
+
+  <label for=''>Malt:</label>
+  <input type='text' name='malt'>
+
+  <label for=''>Hops:</label>
+  <input type='text' name='hops'>
+
+  <label for=''>EBU:</label>
+  <input type='text' name='hops'>
+
+<label for="">Purchased place:</label>
+  <select id="purchasePlace" name="purchasePlace" required>
+    <option value="supermarket">Supermarket</option>
+    <option value="local store">Local store</option>
+    <option value="brewery">Brewery</option>
+    <option value="bar">Bar</option>
+    <option value="online">Online</option>
+    </select> 
+
+<label for=''>Purchased country:</label>
+  <input type='text' name='purchaseCountry'>
+
+<button type="submit">Add</button>
+ 
+</form>
