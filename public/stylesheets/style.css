@@ -199,8 +199,20 @@ width :50%;
 margin:0 auto;
 }
 
+.beer-attributes{
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: -12em;
+margin-bottom: -1em;
+}
 
-
+img{
+  margin: 1em;
+  max-width:8em;
+  /* margin-right:4em; */
+}
 
 
 
