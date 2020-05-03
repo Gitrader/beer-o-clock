@@ -1,17 +1,24 @@
+<div class="login">
+<h1 class="title">Beer O'clock</h1>
+<h3 class="title">Make your beer taste great again</h3>
+
+
 <form action="/auth/login" method="POST" id="form">
   <h2>Login</h2>
 
-  <label for="username">Username</label>
+  <label for="username">Username:</label>
+  <br>
   <input type="text" name="username">
-
-  <label for="password">Password</label>
-  <input type="password" name="password">
+<br>
+  <label for="password">Password:</label>
+  <br>
+  <input type="password"  name="password">
 
   {{#if errorMessage }}
   <div class="error-message">{{ errorMessage }}</div>
   {{/if}}
-
-  <button>Sign in</button>
+<br>
+  <button >Sign in</button>
 
   
 
@@ -19,3 +26,4 @@
     Don't have an account? <a href="/auth/signup">Sign up</a>
   </p>
 </form>
+</div>

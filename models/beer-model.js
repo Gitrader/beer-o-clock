@@ -35,6 +35,11 @@ const beerSchema = new Schema({
   purchaseCountry: { type: String },
   //public: {type : Boolean, require: true},
   //foodPairing: [String] -- backlog
+     // Options object
+    // timestamps: {     // Set auto timestamps
+    //   createdAt: "created_at",
+    //   updatedAt: "update_at"
+    // }
 });
 
 const Beer = mongoose.model("Beer", beerSchema);

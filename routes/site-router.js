@@ -8,13 +8,37 @@ require("dotenv").config();
 
 // GET
 siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
-  res.render("all-beers");
+  
+//   Beer.find()
+//   .then((allBeers)=>{
+//       res.render("all-beers", {allBeers : allBeers});
+
+    
+//   }).catch( (err) => console.log(err))
+  
+    res.render("all-beers");
 });
 
+
 // GET
-siteRouter.get("/beer-description", isLoggedIn, (req, res, next) => {
+siteRouter.get("/beer-description" , isLoggedIn, (req, res, next) => {
   res.render("beer-description");
 });
+
+
+/*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
+  const {beerId}=req.params
+  
+    Beer.findById(beerId)
+    .then((beer) =>{
+res.render("beer-description", {beer:beer});
+    })
+    .catch (err)=> console.log(err))
+  
+    
+});
+*/
+
 
 // GET
 siteRouter.get("/add-beer", isLoggedIn, (req, res, next) => {
