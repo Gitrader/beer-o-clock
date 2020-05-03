@@ -25,7 +25,7 @@ h1{
   margin-bottom:5px;
 }
 
-.signup-title{
+.title{
   text-align:center;
   margin-top:10px;
   margin-bottom:30px;
@@ -102,6 +102,7 @@ form button {
   font-weight: bold;
   padding: 10px;
   margin-top: 20px;
+  margin-bottom: 20px;
   width: 200px;
   outline: none;
   border: none;
