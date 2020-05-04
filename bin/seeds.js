@@ -74,7 +74,7 @@ function getBeerArray() {
         //console.log("1st item inside our beeerlist: ",newBeer[0])
         console.log("we get beers as the printout above states")
         //console.log("emptylist from inside getbeers.then block",emptyList)
-        console.log(beerList)
+        //console.log(beerList)
         return beerList // return beerList!
     })
         .catch(err => {
@@ -100,8 +100,20 @@ mongoose.connect(
     .then((x) => {
         console.log(`we are Connected to DB from seeds: ${x.connections[0].name}`);
         // WARNING!! DROPPING DB TO AVOID DUPLICATES!!
-        return x.connection.dropDatabase()
-    }).then((y) => {
+        //return x.connection.dropDatabase()
+        //console.log("after dropping collection")
+        return Beer.find()
+    })
+    .then( findPromise => {
+    //console.log("findPromise: .", findPromise)
+    if (findPromise.length === 0) {
+        console.log("empty beer.find!")
+    } else {
+        console.log("beer find not empty! :)")
+        throw new Error ("Beer collection already exists! Not seeding.") // we get out of our then chain!
+    } 
+    } )
+    .then((y) => {
         const beerList = getBeerArray() // we are saving an array to variable beerList, right?
         console.log("list of created beers, beerList", beerList)
         return beerList // here we return a (pending) promise of getting a beer array
