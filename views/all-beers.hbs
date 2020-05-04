@@ -4,16 +4,21 @@
 
 <a href="/beer-description">Beer Description page</a>
 
-<article>
-<div class="beer-container">
+{{#each allBeers}}
+    <a href="/beer-description/{{this._id}}" >
+    <article>
+    <div class="beer-container">
     <img src="https://www.encopadebalon.com/3470-large_default/heineken-premium-lager-beer-bottle-24-x-330ml.jpg" alt="image">
     <div class="beer-attributes">
-    <p>Beer Name</p>
+    <p>{{this.name}}</p>
     <p>Beer Type</p>
     <p>Alcohol %</p>
     <p>Country</p>
     <img src="" alt="">
     </div>
-</div>
+    </div>
 
-</article>
+    </article>
+    </a>
+{{/each}}
+
