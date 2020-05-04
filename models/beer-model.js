@@ -21,18 +21,17 @@ const beerSchema = new Schema({
         "other", // need to add if other, string
       ],
   }],
-  brewery:{type:String}, // we should give user option to specify!
-  alcoholVol: { type: Number, required: true },
-  country: { type: String },
-  description: { type: String },
+  alcoholVol: {type: Number},
+  country: {type: String},
+  description: {type: String},
   malt: [String],
   hops: [String],
-  EBU: { type: Number },
+  EBU: {type: Number},
   purchasePlace: {
     type: String,
     enum: ["supermarket", "local store", "brewery", "bar", "online"],
   }, // we should give user option to specify!
-  purchaseCountry: { type: String },
+  purchaseCountry: {type: String},
   //public: {type : Boolean, require: true},
   //foodPairing: [String] -- backlog
      // Options object

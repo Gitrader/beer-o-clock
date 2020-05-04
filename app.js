@@ -7,6 +7,8 @@ const siteRouter = require("./routes/site-router");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
+require("dotenv").config()
+//require("./bin/seeds")
 
 require('dotenv').config();
 
@@ -17,13 +19,12 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
-const DB_NAME = "BeerOclock";
 var app = express();
 
 //Mongoose DB Connection
 
 mongoose
-  .connect(`mongodb://localhost:27017/${DB_NAME}`, {
+  .connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -37,7 +38,7 @@ app.set("view engine", "hbs");
 //MIDDLEWARE
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -46,7 +47,7 @@ app.use(
     secret: "basic-auth-secret",
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 },
+    cookie: {maxAge: 60000},
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 72 * 60 * 60, // 3 days
