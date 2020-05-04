@@ -1,22 +1,28 @@
-<h1>SIGNUP PAGE</h1>
+<h1 class="title">SIGNUP PAGE</h1>
 
 <form id="form" action='/auth/signup' method='POST'>
 
-  <label for=''>Username :</label>
+  <label for=''>Username:</label>
+
   <input type='text' name='username' required>
 
+
   <label for=''>Password :</label>
+
   <input id="myPassword" type='password' name='password' required>
 
   <label for=''>City :</label>
+
   <input type='text' name='city'>
 
   <label for=''>Country :</label>
-  <input type='text' name='country' required>
-  <br>
 
-{{!-- <legend>Beer Preference</legend> --}}
-   <label for="">Beer Preference:</label>
+  <input type='text' name='country' required>
+
+
+  {{!-- <legend>Beer Preference</legend> --}}
+  <label style="margin-top:10px;" for="">Beer Preference:</label>
+  
   {{!-- <select id="beer-preference" name="beer-preference" required>
     <option value="lager">Lager</option>
     <option value="pilsner">Pilsner</option>
@@ -28,54 +34,68 @@
     <option value="gose">Gose</option>
     <option value="sour">Sour</option>
     <option value="no preference">No preference</option> --}}
-    {{!-- </select> --}}
-    {{!-- <fieldset> --}}
-    <div>
-    <input type="checkbox" id="lager" name="beerPreference" value="lager">
+  {{!-- </select> --}}
+  {{!-- <fieldset> --}}
+  
+  <details>
+    <summary>Select yours</summary>
+  <div>
+    <input type="checkbox" class="checkbox"id="lager" name="beerPreference" placeholder="Lager" value="lager">
+    <br>
     <label for="">Lager</label>
   </div>
+  
   <div>
-    <input type="checkbox" id="pilsner" name="beerPreference" value="pilsner">
+    <input type="checkbox" class="checkbox" id="pilsner" name="beerPreference" value="pilsner">
+    <br>
     <label for="">Pilsner</label>
   </div>
   <div>
-    <input type="checkbox" id="wheat-beer" name="beerPreference" value="wheat beer">
+    <input type="checkbox" class="checkbox" id="wheat-beer" name="beerPreference" value="wheat beer">
+    <br>
     <label for="">Wheat beer</label>
   </div>
   <div>
-    <input type="checkbox" id="witbier" name="beerPreference" value="witbier">
+    <input type="checkbox"  class="checkbox" id="witbier" name="beerPreference" value="witbier">
+    <br>
     <label for="">Witbier</label>
   </div>
   <div>
-    <input type="checkbox" id="IPA" name="beerPreference" value="IPA">
+    <input type="checkbox" class="checkbox" id="IPA" name="beerPreference" value="IPA">
+    <br>
     <label for="">IPA</label>
   </div>
   <div>
-    <input type="checkbox" id="porter" name="beerPreference" value="porter">
+    <input type="checkbox" class="checkbox" id="porter" name="beerPreference" value="porter">
+    <br>
     <label for="">Porter</label>
   </div>
   <div>
-    <input type="checkbox" id="stout" name="beerPreference" value="stout">
+    <input type="checkbox" class="checkbox" id="stout" name="beerPreference" value="stout">
+    <br>
     <label for="">Stout</label>
   </div>
   <div>
-    <input type="checkbox" id="gose" name="beerPreference" value="gose">
+    <input type="checkbox" class="checkbox" id="gose" name="beerPreference" value="gose">
+    <br>
     <label for="">Gose</label>
   </div>
   <div>
-    <input type="checkbox" id="sour" name="beerPreference" value="sour">
+    <input type="checkbox" class="checkbox" id="sour" name="beerPreference" value="sour">
+    <br>
     <label for="">Sour</label>
   </div>
-   <div>
-    <input type="checkbox" id="no-preference" name="beerPreference" value="no preference">
+  <div>
+    <input type="checkbox" class="checkbox" id="no-preference" name="beerPreference" value="no preference">
+    <br>
     <label for="">No preference</label>
   </div>
+</details>
+  {{!-- </fieldset> --}}
 
-    {{!-- </fieldset> --}}
-  
 
 
-  
+
 
   <button type='submit'>Submit</button>
 </form>
@@ -84,5 +104,3 @@
 {{#if errorMessage}}
 <div class="error-message"> {{errorMessage}} </div>
 {{/if}}
-
-

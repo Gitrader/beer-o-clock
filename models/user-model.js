@@ -27,6 +27,7 @@ const userSchema = new Schema({
   userReviews: [{ type: mongoose.ObjectId, ref: "Review", required: true }],
   //followers:[userID]-- backlog
   //public: {type: boolean, required: true} -- backlog
+  
 });
 
 const User = mongoose.model("User", userSchema);

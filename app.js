@@ -8,7 +8,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 
-
+require('dotenv').config();
 
 const mongoose = require("mongoose");
 
@@ -49,7 +49,7 @@ app.use(
     cookie: { maxAge: 60000 },
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60, // 1 day
+      ttl: 72 * 60 * 60, // 3 days
     }),
   })
 );

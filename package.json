@@ -8,15 +8,20 @@
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "cloudinary": "^1.21.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "express-session": "^1.17.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "mongoose": "^5.9.10",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^2.2.1",
+    "punkapi-javascript-wrapper": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
