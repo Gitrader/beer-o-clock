@@ -8,7 +8,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 require("dotenv").config()
-//require("./bin/seeds")
+require("./bin/seeds")
 
 require('dotenv').config();
 
