@@ -2,8 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const beerSchema = new Schema({
+                    // authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+                    // name: { type: String, required: true, },
+                    // image_url: { type: String },
   authorId: {type: mongoose.ObjectId, ref: "User"},
-  name: {type: String, required: true, },
+  name: {type: String, required: true, }, // make it unique!
   image_url: {type: String},
   beerType: [{
     type: String,

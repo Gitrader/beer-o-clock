@@ -1,12 +1,8 @@
 <h1 class="title">ADD REVIEW</h1>
 
-<form action="/add-review" method="POST" id="add-review-form">
+<form action="/beer-description/{{beerId}}/add-review" method="POST" id="add-review-form">
 
 
-  <label for="">Username ID:</label>
-  <br>
-  <input type="text" name="username">
-<br>
   <label for="">Beer Rate:</label> 
 
   <select id="beer-rate" name="rating">
@@ -27,5 +23,7 @@
   <textarea name="review" form="add-review-form">Write your review here...</textarea>
   </div>
   <br>
-  <button >Add</button>
+  <button type="submit">Add</button>
+
+  </form>
  
