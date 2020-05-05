@@ -22,9 +22,9 @@ const userSchema = new Schema({
       "no preference",
     ],
   }],
-  likedBeers: [{ type: mongoose.ObjectId, ref: "Beer", required: true }],
-  userBeers: [{ type: mongoose.ObjectId, ref: "Beer", required: true }], // should we add userID here that these can be linked?
-  userReviews: [{ type: mongoose.ObjectId, ref: "Review", required: true }],
+  likedBeers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Beer" }], //, required: true
+  userBeers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Beer"}], // , required: true // should we add userID here that these can be linked?
+  userReviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }], // , required: true
   //followers:[userID]-- backlog
   //public: {type: boolean, required: true} -- backlog
   

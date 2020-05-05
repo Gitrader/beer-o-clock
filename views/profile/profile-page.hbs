@@ -12,21 +12,22 @@
 <details>
     <summary>Added Beers</summary>
 
-    {{!-- {{#each allBeers}} --}}
-    <a href="profile/profile-page/edit-reviews/{{this._id}}">
+    {{!-- {{#each userBeers}} --}}
+    <a href="edit-beer/{{this._id}}">
         <article>
             <div class="beer-container">
                 <img src="https://www.encopadebalon.com/3470-large_default/heineken-premium-lager-beer-bottle-24-x-330ml.jpg"
                     alt="image">
                 <div class="beer-attributes">
-                    <p>{{this.name}}</p>
+                    <p>{{userBeers.name}}</p>
                     <p>Beer Type</p>
                     <p>Alcohol %</p>
                     <p>Rate</p>
                     <p>Country</p>
+                    <a href="edit-beer/{{this._id}}"><i class="material-icons">settings</i></a>
+
                 </div>
             </div>
-
         </article>
     </a>
     {{!-- {{/each}} --}}
@@ -35,7 +36,7 @@
 <details>
     <summary>Added Reviews</summary>
 
-    {{!-- {{#each allBeers}} --}}
+    {{!-- {{#each userReviews}} --}}
     <a href="edit-reviews/{{this._id}}">
         <article>
             <div class="beer-container">

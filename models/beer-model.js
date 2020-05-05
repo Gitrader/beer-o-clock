@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const beerSchema = new Schema({
-  authorId: { type: mongoose.ObjectId, ref: "User" },
+  authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   name: { type: String, required: true, },
   image_url: { type: String },
   beerType: [{
