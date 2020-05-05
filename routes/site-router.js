@@ -66,7 +66,6 @@ siteRouter.post(
   (req, res, next) => {
     // thanks to multer, you have now access to the new object "req.file"
     const {
-      authorId,
       name,
       //   beer_image_url,
       beerType,
