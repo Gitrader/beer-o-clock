@@ -16,86 +16,86 @@ const punkAPI = new PunkAPIWrapper();
 // STARTING HERE ....
 // this will give out an array without extra properties to fit our model
 function filterPunkBeerProps(punkBeerObj) {
-  const ourBeer = new Beer();
-  ourBeer.name = punkBeerObj.name;
-  ourBeer.brewery = "BrewDog";
-  //ourBeer.image_url = punkBeerObj.
-  ourBeers.push(ourBeer);
-  console.log(ourBeer);
+    const ourBeer = new Beer();
+    ourBeer.name = punkBeerObj.name;
+    ourBeer.brewery = "BrewDog";
+    //ourBeer.image_url = punkBeerObj.
+    ourBeers.push(ourBeer);
+    console.log(ourBeer);
 
-  //return starterBeerDB;
+    //return starterBeerDB;
 }
 function getPunkBeers() {
-  // will push punkBeers into our own array of beers
-  const ourBeers = []; //empty array where we will push new items
-  const punkBeerPr = punkAPI.getBeers();
-  punkBeerPr
-    .then((beerArray) => {
-      beerArray.forEach((beer) => {
-        console.log("beerArray object.name: ", beer.name);
-        //const ourBeer = new Beer;
-        //ourBeer.name = beer.name;
-        //ourBeers.push(ourBeer)
-        filterPunkBeerProps(beer);
-        //console.log(ourBeers)
-      });
-      console.log("ourbeers punkbeer foraechin jälkeen:", ourBeers);
-    })
-    .catch((error) => console.log("error seeding from punkAPI", error));
+    // will push punkBeers into our own array of beers
+    const ourBeers = []; //empty array where we will push new items
+    const punkBeerPr = punkAPI.getBeers();
+    punkBeerPr
+        .then((beerArray) => {
+            beerArray.forEach((beer) => {
+                console.log("beerArray object.name: ", beer.name);
+                //const ourBeer = new Beer;
+                //ourBeer.name = beer.name;
+                //ourBeers.push(ourBeer)
+                filterPunkBeerProps(beer);
+                //console.log(ourBeers)
+            });
+            console.log("ourbeers punkbeer foraechin jälkeen:", ourBeers);
+        })
+        .catch((error) => console.log("error seeding from punkAPI", error));
 
-  return ourBeers;
+    return ourBeers;
 }
 // ... ENDING HERE IS NOT USED ATM BUT DONT REMOVE YET
 
 function getBeerArray() {
-  // const emptyArr
-  let punkPromise = punkAPI
-    .getBeers()
-    .then((gotbeers) => {
-      const beerList = [];
-      //console.log("eka alkio gotbeersistä ", gotbeers[0])
-      gotbeers.forEach((beerObj) => {
-        // create a new beer based on our own model and take punkAPI beer properties to it
-        let newBeer = new Beer(); // remember parenthesis!
-        newBeer.name = beerObj.name;
-        newBeer.brewery = "BrewDog";
-        newBeer.image_url = beerObj.image_url;
-        newBeer.alcoholVol = beerObj.abv;
+    // const emptyArr
+    let punkPromise = punkAPI
+        .getBeers()
+        .then((gotbeers) => {
+            const beerList = [];
+            //console.log("eka alkio gotbeersistä ", gotbeers[0])
+            gotbeers.forEach((beerObj) => {
+                // create a new beer based on our own model and take punkAPI beer properties to it
+                let newBeer = new Beer(); // remember parenthesis!
+                newBeer.name = beerObj.name;
+                newBeer.brewery = "BrewDog";
+                newBeer.image_url = beerObj.image_url;
+                newBeer.alcoholVol = beerObj.abv;
 
-        beerObj.ingredients.malt.forEach((malt) => {
-          newBeer.malt.push(malt.name);
-        });
-        beerObj.ingredients.hops.forEach((hops) => {
-          // could add here a condition that don't push if the name is already there!!!
-          newBeer.hops.push(hops.name);
-        });
+                beerObj.ingredients.malt.forEach((malt) => {
+                    newBeer.malt.push(malt.name);
+                });
+                beerObj.ingredients.hops.forEach((hops) => {
+                    // could add here a condition that don't push if the name is already there!!!
+                    newBeer.hops.push(hops.name);
+                });
 
-        newBeer.EBU = beerObj.ibu; // look it's actually IBU in punkbeers!
-        newBeer.brewery = "BrewDog"
-        beerList.push(newBeer);
-      });
-      //console.log("1st item inside our beeerlist: ",newBeer[0])
-      console.log("we get beers as the printout above states");
-      //console.log("emptylist from inside getbeers.then block",emptyList)
-      //console.log(beerList);
-      return beerList; // return beerList!
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return punkPromise;
+                newBeer.EBU = beerObj.ibu; // look it's actually IBU in punkbeers!
+                newBeer.brewery = "BrewDog"
+                beerList.push(newBeer);
+            });
+            //console.log("1st item inside our beeerlist: ",newBeer[0])
+            console.log("we get beers as the printout above states");
+            //console.log("emptylist from inside getbeers.then block",emptyList)
+            //console.log(beerList);
+            return beerList; // return beerList!
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return punkPromise;
 }
 
 function seedDatabase(beerArr) {
-  const beerPromises = beerArr.map((beerObj) => {
-    return Beer.create({ beerObj });
-  });
-  return beerPromises;
+    const beerPromises = beerArr.map((beerObj) => {
+        return Beer.create({beerObj});
+    });
+    return beerPromises;
 }
 
 // 1. CONNECT TO MONGOOSE
 mongoose.connect(
-    `mongodb://localhost:27017/BeerOclock`,
+    process.env.MONGODB_URI,
     {useNewUrlParser: true, useUnifiedTopology: true}
 )
     .then((x) => {
@@ -105,15 +105,15 @@ mongoose.connect(
         //console.log("after dropping collection")
         return Beer.find()
     })
-    .then( findPromise => {
-    //console.log("findPromise: .", findPromise)
-    if (findPromise.length === 0) {
-        console.log("empty beer.find!")
-    } else {
-        console.log("beer find not empty! :)")
-        throw new Error ("Beer collection already exists! Not seeding.") // we get out of our then chain!
-    } 
-    } )
+    .then(findPromise => {
+        //console.log("findPromise: .", findPromise)
+        if (findPromise.length === 0) {
+            console.log("empty beer.find!")
+        } else {
+            console.log("beer find not empty! :)")
+            throw new Error("Beer collection already exists! Not seeding.") // we get out of our then chain!
+        }
+    })
     .then((y) => {
         const beerList = getBeerArray() // we are saving an array to variable beerList, right?
         console.log("list of created beers, beerList", beerList)
