@@ -1,1 +1,58 @@
 <h1>Profile Page</h1>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Joe_Exotic_%28Santa_Rose_County_Jail%29.png"
+    alt="profile-pic">
+
+<p>{{user.username}}</p>
+<p>{{user.country}}</p>
+<p>{{user.city}}</p>
+<p>{{user.beerPreference}}</p>
+
+
+<details>
+    <summary>Added Beers</summary>
+
+    {{!-- {{#each userBeers}} --}}
+    <a href="edit-beer/{{this._id}}">
+        <article>
+            <div class="beer-container">
+                <img src="https://www.encopadebalon.com/3470-large_default/heineken-premium-lager-beer-bottle-24-x-330ml.jpg"
+                    alt="image">
+                <div class="beer-attributes">
+                    <p>{{userBeers.name}}</p>
+                    <p>Beer Type</p>
+                    <p>Alcohol %</p>
+                    <p>Rate</p>
+                    <p>Country</p>
+                    <a href="edit-beer/{{this._id}}"><i class="material-icons">settings</i></a>
+
+                </div>
+            </div>
+        </article>
+    </a>
+    {{!-- {{/each}} --}}
+</details>
+
+<details>
+    <summary>Added Reviews</summary>
+
+    {{!-- {{#each userReviews}} --}}
+    <a href="edit-reviews/{{this._id}}">
+        <article>
+            <div class="beer-container">
+                <img src="https://www.encopadebalon.com/3470-large_default/heineken-premium-lager-beer-bottle-24-x-330ml.jpg"
+                    alt="image">
+                <div class="beer-attributes">
+                    <p>{{this.name}}</p>
+                    <p>Review</p>
+                    <p>Rate</p>
+
+                </div>
+            </div>
+
+        </article>
+    </a>
+    {{!-- {{/each}} --}}
+</details>
+
+<a href="edit"><i class="material-icons">settings</i></a>
