@@ -23,8 +23,17 @@ var app = express();
 
 //Mongoose DB Connection
 
+
+// uros
+// MONGOOSE CONNECTION
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+//
+
 mongoose
-  .connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -42,9 +51,11 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// SESSION MIDDLEWARE
+
 app.use(
   session({
-    secret: "basic-auth-secret",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
     cookie: {maxAge: 60000},
