@@ -40,14 +40,33 @@ siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
 siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
   const { beerId } = req.params;
 
-  Beer.findById(beerId)
+  let promise1=Beer.findById(beerId)
 
     .then((beer) => {
       console.log("beer", beer);
-      res.render("beer-description", { beer: beer });
+     return beer 
+    
+      
+    }) .catch((err) => console.log(err));
+
+    let promise2=Review.findOne({beerId:req.params.beerId})
+    // .populate("")
+    .then((review) => {
+      console.log("revoew", review)
+      return review
+      
+    })
+    .catch((err) => console.log(err));
+
+    Promise.all([promise1, promise2])
+    .then((resultArray) => {
+      res.render("beer-description", { beer: resultArray[0], review: resultArray[1]  });
     })
     .catch((err) => console.log(err));
 });
+
+
+
 
 /*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
   const {beerId}=req.params
@@ -122,9 +141,66 @@ siteRouter.post(
   }
 );
 
-siteRouter.get("/add-review", isLoggedIn, (req, res, next) => {
-  res.render("add-review");
+siteRouter.get("/beer-description/:beerId/add-review", isLoggedIn, (req, res, next) => {
+  
+  res.render("add-review", {beerId:req.params.beerId});
 });
+
+
+//POST
+siteRouter.post(
+  "/beer-description/:beerId/add-review",
+  isLoggedIn,
+  (req, res, next) => {
+    const {
+      review,
+      rating
+    } = req.body;
+    
+
+    const newReview = {
+      
+      beerId : req.params.beerId,
+      userId : req.session.currentUser._id,
+      review,
+      rating
+    };
+
+
+    Review.create(newReview)
+      // .populate("userId")// beer that the user added
+      .then(reviewCreated=>{
+        console.log("rev created",reviewCreated)
+        return User.updateOne({_id : reviewCreated.userId}, {$push:{userReviews:reviewCreated._id}})//userBeers
+        // adding to the array of the user beer beerCreated._id $push
+        
+
+       })
+      .then((userUpdated) => {
+        console.log("userUpdated", userUpdated)
+        res.redirect(`/beer-description/${req.params.beerId}`);
+      })
+      .catch((err) => console.log(err));
+  }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // GET
 siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
