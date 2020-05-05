@@ -1,7 +1,52 @@
 <h1>Beer Description</h1>
 
+<div> {{!-- add class here if needed --}}
+    <h4>{{beer.name}}</h4>
+    <img src=" {{beer.image_url}} " alt="No image available">
+    <div>
+        {{#each beer.beerType}} 
+            <p>Beer Type: {{this}}</p> 
+        {{else}}
+            <p>No beer type specified</p> 
+        {{/each}}
 
-<p>{{beer.name}}</p>
+        <p>Alc. {{beer.alcoholVol}} %</p>
+
+        {{#if beer.description}}
+            <p> {{beer.description}} </p>
+        {{/if}}
+
+        <p>EBU: {{beer.EBU}} </p>
+
+        {{#if beer.country}}
+            <p>Origin: {{beer.country}}</p>
+        {{else}}
+            <p>Unknown origin</p>
+        {{/if}}
+
+        {{#if beer.brewery}}
+            <p>Origin: {{beer.brewery}}</p>
+        {{else}}
+            <p>Unknown brewery</p>
+        {{/if}}
+
+        <p>Malts: </p>
+        {{#each beer.malt}}
+            <ul>
+                <li> {{this}} </li>
+            </ul>
+        {{/each}}
+
+        <p>Hops: </p>
+        {{#each beer.hops}}
+            <ul>
+                <li> {{this}} </li>
+            </ul>
+        {{/each}}
+    </div>
+
+</div>
+
 
 
 <a href="/beer-description/{{beer._id}}/add-review">Add review</a>

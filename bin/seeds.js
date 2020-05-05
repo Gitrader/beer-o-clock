@@ -71,6 +71,7 @@ function getBeerArray() {
         });
 
         newBeer.EBU = beerObj.ibu; // look it's actually IBU in punkbeers!
+        newBeer.brewery = "BrewDog"
         beerList.push(newBeer);
       });
       //console.log("1st item inside our beeerlist: ",newBeer[0])
