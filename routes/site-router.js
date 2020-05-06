@@ -418,31 +418,17 @@ siteRouter.post("/profile/:reviewId/edit-review/", isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// GET DELETE BEER! will be a form inside edit-beer
-// GET
-siteRouter.get("/profile/:beerId/delete", isLoggedIn, (req, res, next) => {
+// POST DELETE BEER! will be a form inside edit-beer
+siteRouter.post("/profile/:beerId/delete", isLoggedIn, (req, res, next) => {
+  console.log("heeeeey from get delete route")
   const { beerId } = req.params;
 
-  Beer.findByIdAndDelete(beerId)
+  Beer.findByIdAndRemove(beerId)
   .then(() => {
     console.log("this is after deleting a beer!")
     res.redirect("/profile/profile-page")
   })
   .catch((err) => console.log("error deleting beer: ",err))
 })
-
-// siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
-//   const user = req.session.currentUser; // is an object, remember!
-//   //now make a DB query to find this user and all the beers they like
-//   User.findById(user._id)
-//   .populate("likedBeers")
-//   .then(foundUser => {
-//     const likedBeers = foundUser.likedBeers
-//     res.render("favorite-beers", {likedBeers: likedBeers});
-
-//   })
-//   .catch((err) => console.log("error in finding fav beers", err))
-// });
-
 
 module.exports = siteRouter;
