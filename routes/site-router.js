@@ -100,10 +100,7 @@ siteRouter.get("/add-beer", isLoggedIn, (req, res, next) => {
 });
 
 // POST
-siteRouter.post(
-  "/add-beer",
-  isLoggedIn,
-  parser.single("image_url"),
+siteRouter.post("/add-beer", isLoggedIn, parser.single("image_url"),
   (req, res, next) => {
     // thanks to multer, you have now access to the new object "req.file"
     const {
@@ -206,10 +203,10 @@ siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
   .catch((err) => console.log("error in finding fav beers", err))
 });
 
-// GET
-siteRouter.get("/private", isLoggedIn, (req, res, next) => {
-  res.render("private");
-});
+// GET             THIS IS NOT USED
+// siteRouter.get("/private", isLoggedIn, (req, res, next) => {
+//   res.render("private");
+// });
 
 
 // GET
@@ -332,6 +329,7 @@ siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn,  parser.single("image
     name,
     // image_url,
     beerType,
+    //image_url: beer_image_url,
     brewery,
     alcoholVol,
     country,
@@ -400,7 +398,6 @@ siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn,  parser.single("image
 siteRouter.get("/profile/:reviewId/edit-review/", isLoggedIn, (req, res, next) => {
   const { reviewId } = req.params
   console.log("THIS OUR REVIEW ID", reviewId)
- 
 
   Review.findById(reviewId)
   .then(review=>{
@@ -408,8 +405,6 @@ siteRouter.get("/profile/:reviewId/edit-review/", isLoggedIn, (req, res, next) =
   })
   .catch((err) => console.log("Find review error",err));
 });
-
-
 
 // POST
 siteRouter.post("/profile/:reviewId/edit-review/", isLoggedIn, (req, res) => {
@@ -422,5 +417,32 @@ siteRouter.post("/profile/:reviewId/edit-review/", isLoggedIn, (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+// GET DELETE BEER! will be a form inside edit-beer
+// GET
+siteRouter.get("/profile/:beerId/delete", isLoggedIn, (req, res, next) => {
+  const { beerId } = req.params;
+
+  Beer.findByIdAndDelete(beerId)
+  .then(() => {
+    console.log("this is after deleting a beer!")
+    res.redirect("/profile/profile-page")
+  })
+  .catch((err) => console.log("error deleting beer: ",err))
+})
+
+// siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
+//   const user = req.session.currentUser; // is an object, remember!
+//   //now make a DB query to find this user and all the beers they like
+//   User.findById(user._id)
+//   .populate("likedBeers")
+//   .then(foundUser => {
+//     const likedBeers = foundUser.likedBeers
+//     res.render("favorite-beers", {likedBeers: likedBeers});
+
+//   })
+//   .catch((err) => console.log("error in finding fav beers", err))
+// });
+
 
 module.exports = siteRouter;

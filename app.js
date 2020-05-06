@@ -47,7 +47,11 @@ app.use(
     secret: "basic-auth-secret",
     resave: true,
     saveUninitialized: false,
+<<<<<<< HEAD
     // cookie: {maxAge: 60000},
+=======
+    //cookie: {maxAge: 60000},
+>>>>>>> dev
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 72 * 60 * 60, // 3 days

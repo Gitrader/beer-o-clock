@@ -2,15 +2,15 @@
 
 <form action='/profile/{{beer._id}}/edit-beer/' method='POST' enctype="multipart/form-data">
 
-<label for=''>Select an image :</label>
-  <input type="file" name="image_url" value={{beer.image_url}}/>
- 
-
-<label for=''>Beer name :</label>
-  <input type='text' name='name' required value={{beer.name}}>  
+  <label for=''>Select an image : *</label>
+  <input type="file" name="image_url" required value={{beer.image_url}} />
 
 
-  <label for="">Beer Type:</label> 
+  <label for=''>Beer name :</label>
+  <input type='text' name='name' required value={{beer.name}}>
+
+
+  <label for="">Beer Type:</label>
 
   <select id="beer-type" name="beerType">
     <option value="lager">Lager</option>
@@ -22,23 +22,23 @@
     <option value="stout">Stout</option>
     <option value="gose">Gose</option>
     <option value="sour">Sour</option>
-    
-    </select>
 
-    <label for=''>Brewery :</label>
-  <input type='text' name='brewery' value={{beer.brewery}}> 
+  </select>
+
+  <label for=''>Brewery :</label>
+  <input type='text' name='brewery' value={{beer.brewery}}>
 
   <label for=''>Alcohol Volume (%) :</label>
-  <input type='text' name='alcoholVol' required value={{beer.alcoholVol}}> 
+  <input type='text' name='alcoholVol' required value={{beer.alcoholVol}}>
 
   <label for=''>Country :</label>
   <input type='text' name='country' value={{beer.country}}>
 
- <label for=''>Description :</label>
+  <label for=''>Description :</label>
   <input type='text' name='description' value={{beer.description}}>
 
   <label for=''>Malt:</label>
-  <input type='text' name='malt'value={{beer.malt}}>
+  <input type='text' name='malt' value={{beer.malt}}>
 
   <label for=''>Hops:</label>
   <input type='text' name='hops' value={{beer.hops}}>
@@ -46,20 +46,26 @@
   <label for=''>EBU:</label>
   <input type='text' name='EBU' value={{beer.EBU}}>
 
-<label for="">Purchased place:</label>
+  <label for="">Purchased place:</label>
   <select id="purchasePlace" name="purchasePlace" required value={{beer.purchasedPlace}}>
     <option value="supermarket">Supermarket</option>
     <option value="local store">Local store</option>
     <option value="brewery">Brewery</option>
     <option value="bar">Bar</option>
     <option value="online">Online</option>
-    </select> 
+  </select>
 
-<label for=''>Purchased country:</label>
+  <label for=''>Purchased country:</label>
   <input type='text' name='purchaseCountry' value={{beer.purchaseCountry}}>
 
 
   <button type='submit'>EDIT</button>
 </form>
 
+{{!-- another form to be able to delete the beer! i hope we cant delete beers that we dont "own" --}}
 
+{{!-- also why is the method here post but in the routes GET? is that ok? --}}
+<form action="/profile/{{beer._id}}/delete" method="post">
+    <button type="submit">Delete beer</button>
+    {{!-- add a confirm message here? are you sure you want to delete? --}}
+</form>
