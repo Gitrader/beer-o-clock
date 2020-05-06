@@ -2,8 +2,8 @@
 
 <form action='/profile/{{beer._id}}/edit-beer/' method='POST' enctype="multipart/form-data">
 
-  <label for=''>Select an image :</label>
-  <input type="file" name="image_url" value={{beer.image_url}} />
+  <label for=''>Select an image : *</label>
+  <input type="file" name="image_url" required value={{beer.image_url}} />
 
 
   <label for=''>Beer name :</label>
@@ -60,4 +60,12 @@
 
 
   <button type='submit'>EDIT</button>
+</form>
+
+{{!-- another form to be able to delete the beer! i hope we cant delete beers that we dont "own" --}}
+
+{{!-- also why is the method here post but in the routes GET? is that ok? --}}
+<form action="/profile/{{beer._id}}/delete" method="post">
+    <button type="submit">Delete beer</button>
+    {{!-- add a confirm message here? are you sure you want to delete? --}}
 </form>
