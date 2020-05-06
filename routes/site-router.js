@@ -15,12 +15,6 @@ require("dotenv").config();
 //   .catch((err) => console.log(err));
 // }
 
-
-
-
-
-
-
 // GET
 siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
   Beer.find()
@@ -40,33 +34,31 @@ siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
 siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
   const { beerId } = req.params;
 
-  let promise1=Beer.findById(beerId)
+  let promise1 = Beer.findById(beerId)
 
     .then((beer) => {
       console.log("beer", beer);
-     return beer 
-    
-      
-    }) .catch((err) => console.log(err));
-
-    let promise2=Review.findOne({beerId:req.params.beerId})
-    // .populate("")
-    .then((review) => {
-      console.log("revoew", review)
-      return review
-      
+      return beer;
     })
     .catch((err) => console.log(err));
 
-    Promise.all([promise1, promise2])
+  let promise2 = Review.findOne({ beerId: req.params.beerId })
+    // .populate("")
+    .then((review) => {
+      console.log("revoew", review);
+      return review;
+    })
+    .catch((err) => console.log(err));
+
+  Promise.all([promise1, promise2])
     .then((resultArray) => {
-      res.render("beer-description", { beer: resultArray[0], review: resultArray[1]  });
+      res.render("beer-description", {
+        beer: resultArray[0],
+        review: resultArray[1],
+      });
     })
     .catch((err) => console.log(err));
 });
-
-
-
 
 /*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
   const {beerId}=req.params
@@ -111,7 +103,7 @@ siteRouter.post(
     const beer_image_url = req.file.secure_url;
 
     const newBeer = {
-      authorId:req.session.currentUser._id,
+      authorId: req.session.currentUser._id,
       name,
       image_url: beer_image_url,
       beerType,
@@ -125,82 +117,64 @@ siteRouter.post(
       purchasePlace,
       purchaseCountry,
     };
-  
+
     Beer.create(newBeer)
       //.populate("authorId")// beer that the user added
-      .then(beerCreated=>{
-        return User.updateOne({_id : beerCreated.authorId}, {$push:{userBeers:beerCreated._id}})//userBeers
+      .then((beerCreated) => {
+        return User.updateOne(
+          { _id: beerCreated.authorId },
+          { $push: { userBeers: beerCreated._id } }
+        ); //userBeers
         // adding to the array of the user beer beerCreated._id $push
-        
       })
       .then((userUpdated) => {
-        console.log("userUpdated", userUpdated)
+        console.log("userUpdated", userUpdated);
         res.redirect("all-beers");
       })
       .catch((err) => console.log(err));
   }
 );
 
-siteRouter.get("/beer-description/:beerId/add-review", isLoggedIn, (req, res, next) => {
-  
-  res.render("add-review", {beerId:req.params.beerId});
-});
-
+// GET
+siteRouter.get(
+  "/beer-description/:beerId/add-review",
+  isLoggedIn,
+  (req, res, next) => {
+    res.render("add-review", { beerId: req.params.beerId });
+  }
+);
 
 //POST
 siteRouter.post(
   "/beer-description/:beerId/add-review",
   isLoggedIn,
   (req, res, next) => {
-    const {
-      review,
-      rating
-    } = req.body;
-    
+    const { review, rating } = req.body;
 
     const newReview = {
-      
-      beerId : req.params.beerId,
-      userId : req.session.currentUser._id,
+      beerId: req.params.beerId,
+      userId: req.session.currentUser._id,
       review,
-      rating
+      rating,
     };
-
 
     Review.create(newReview)
       // .populate("userId")// beer that the user added
-      .then(reviewCreated=>{
-        console.log("rev created",reviewCreated)
-        return User.updateOne({_id : reviewCreated.userId}, {$push:{userReviews:reviewCreated._id}})//userBeers
+      .then((reviewCreated) => {
+        console.log("rev created", reviewCreated);
+        return User.updateOne(
+          { _id: reviewCreated.userId },
+          { $push: { userReviews: reviewCreated._id } }
+        ); //userBeers
         // adding to the array of the user beer beerCreated._id $push
-        
-
-       })
+      })
       .then((userUpdated) => {
-        console.log("userUpdated", userUpdated)
+        console.log("userUpdated", userUpdated);
         res.redirect(`/beer-description/${req.params.beerId}`);
       })
       .catch((err) => console.log(err));
   }
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // GET
 siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
@@ -208,16 +182,15 @@ siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
 });
 
 // GET
+siteRouter.get("/private", isLoggedIn, (req, res, next) => {
+  res.render("private");
+});
+
+
+// GET
 // siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
 //   res.render("profile/profile-page");
 // });
-
-// GET
-siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
-  const user = req.session.currentUser;
- 
-  res.render("profile/profile-page", { user: user });
-});
 
 // IF WE NEED TO IMPLEMENT PUBLIC OR PRIVATE VIEW
 
@@ -237,40 +210,89 @@ siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
 
 // AFTER EDITING THE USER IN DB, SAVE THE UPDATED USER IN req.session.currentUser
 
+
+/////////////// PROFILE ////////////
+
+
+
 // GET
-siteRouter.get("/profile/edit", isLoggedIn, (req, res, next) => {
-  res.render("profile/edit");
+siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
+  const user = req.session.currentUser;
+  User.findById(user._id)
+    .populate("userBeers")
+    .populate("userReviews")
+    // likedBeers can be added here too
+    .then((user) => {
+      const userReviews = user.userReviews;
+      res.render("profile/profile-page", { user: user});
+    })
+    .catch((err) => {
+      console.log("eer", err);
+    });
 });
 
 // GET
-siteRouter.get("/private", isLoggedIn, (req, res, next) => {
-  res.render("private");
+siteRouter.get("/profile/edit-profile", isLoggedIn, (req, res, next) => {
+  res.render("profile/edit-profile");
 });
 
-// EDIT BEER
-
-// GET
-siteRouter.get("/profile/edit-beer/:beerId", isLoggedIn, (req, res) => {
-  const { beerId } = req.params;
-
-  Beer.findById(beerId)
-    .populate("User")
-    .then((beer) => {
-      res.render("beer-edit", { beer: beer });
+//////////////////////// EDIT PROFILE /////////////////////////////
+//POST
+siteRouter.post("/profile/:userId/edit-profile/", isLoggedIn, parser.single("profilePicture"),(req, res) => {
+  const user = req.session.currentUser;
+  const {
+    name,
+    city,
+    country,
+    beerPreference,
+    } = req.body;
+    const profile_image_url = req.file.secure_url;
+  User.updateOne(
+    { _id: userId },
+    {
+      name,
+      profilePicture : profile_image_url,
+      city,
+      country,
+      beerPreference,
+    }
+  )
+    .then(() => {
+      res.redirect(`/profile/profile-page`); 
     })
     .catch((err) => console.log(err));
 });
 
+
+
+/////////////////////// EDIT BEER ///////////////////////////////
+
+// GET DON'T NEED IT
+// siteRouter.get("/profile/edit-beer", isLoggedIn, (req, res, next) => {
+//   res.render("profile/edit-beer");
+// });
+
 // GET
-siteRouter.get("/profile/edit-beer", isLoggedIn, (req, res, next) => {
-  res.render("profile/edit-beer");
+siteRouter.get("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
+  const { beerId } = req.params;
+
+  Beer.findById(beerId)
+    // .populate("User")
+    .then((beer) => {
+      res.render("profile/edit-beer", { beer: beer });
+    })
+    .catch((err) => console.log(err));
 });
 
+            // GET
+            // siteRouter.get("/profile/edit-beer", isLoggedIn, (req, res, next) => {
+            //   res.render("profile/edit-beer");
+            // });
+
 // POST
-siteRouter.post("/profile/edit-beer/:beerId", isLoggedIn, (req, res) => {
-  const { userBeers } = req.params;
+siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
+  const { beerId } = req.params;
   const {
-    authorId,
     name,
     image_url,
     beerType,
@@ -284,11 +306,11 @@ siteRouter.post("/profile/edit-beer/:beerId", isLoggedIn, (req, res) => {
     purchasePlace,
     purchaseCountry,
   } = req.body;
-
+  const beer_image_url = req.file.secure_url;
   Beer.updateOne(
-    { _id: userBeers },
+    { _id: beerId },
     {
-      authorId,
+      authorId: req.session.currentUser._id,
       name,
       image_url,
       beerType,
@@ -304,24 +326,63 @@ siteRouter.post("/profile/edit-beer/:beerId", isLoggedIn, (req, res) => {
     }
   )
     .then(() => {
-      res.redirect("/edit-beer");
+      res.redirect(`/profile/profile-page`); 
     })
     .catch((err) => console.log(err));
 });
 
-// GET
-siteRouter.get("/profile/edit-reviews", isLoggedIn, (req, res, next) => {
-  res.render("profile/edit-reviews");
-});
+
 
 // POST
-siteRouter.post("/profile/edit-reviews/:reviewId", isLoggedIn, (req, res) => {
-  const { reviewId } = req.params;
-  const { review, rating } = req.body;
+// siteRouter.post("/profile/edit-reviews/:reviewId", isLoggedIn, (req, res) => {
+//   const { reviewId } = req.params;
+//   const { review, rating } = req.body;
 
-  Review.updateOne({ _id: reviewId }, { review, rating })
+//   Review.updateOne({ _id: reviewId }, { review, rating })
+//     .then(() => {
+//       res.redirect("/edit-reviews");
+//     })
+//     .catch((err) => console.log(err));
+// });
+
+// GET
+// siteRouter.get("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
+//   const { beerId } = req.params;
+
+//   Beer.findById(beerId)
+//     // .populate("User")
+//     .then((beer) => {
+//       res.render("profile/edit-beer", { beer: beer });
+//     })
+//     .catch((err) => console.log(err));
+// });
+
+
+
+//////REVIEW EXAMPLE//////
+// GET
+siteRouter.get("/profile/:reviewId/edit-review/", isLoggedIn, (req, res, next) => {
+  const { reviewId } = req.params
+  console.log("THIS OUR REVIEW ID", reviewId)
+ 
+
+  Review.findById(reviewId)
+  .then(review=>{
+    res.render("profile/edit-review", {review:review});
+  })
+  .catch((err) => console.log("Find review error",err));
+});
+
+
+
+// POST
+siteRouter.post("/profile/:reviewId/edit-review/", isLoggedIn, (req, res) => {
+  const { reviewId } = req.params;
+  const { rating, review } = req.body;
+
+  Review.updateOne({ _id: reviewId },{rating,review})
     .then(() => {
-      res.redirect("/edit-reviews");
+      res.redirect(`/profile/profile-page`); 
     })
     .catch((err) => console.log(err));
 });

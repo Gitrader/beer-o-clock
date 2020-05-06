@@ -197,6 +197,13 @@ border : 2px solid black;
 border-radius: 5px;
 width :50%;
 margin:0 auto;
+padding:0 auto;
+
+}
+
+.beer-link{
+  text-decoration: none;
+  color:black;
 }
 
 .beer-attributes{
@@ -204,15 +211,31 @@ margin:0 auto;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin-top: -12em;
-margin-bottom: -1em;
+margin-top:-25%;
+
+}
+article{
+  margin-top:3.5em;
+  
+}
+.img-beers{
+  margin-top : 10%;
+  margin-left:5%;
+  /* margin: 1em; */
+  width:5%;
+  /* max-width:8em; */
+  /* margin-right:4em; */
 }
 
-img{
+.img-profile{
+  
+  
   margin: 1em;
+
   max-width:8em;
   /* margin-right:4em; */
 }
+
 
 .text-area{
   width: 300px;

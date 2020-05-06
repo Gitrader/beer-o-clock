@@ -1,3 +1,5 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
 <h1 class="title">ALL BEERS PAGE</h1>
 
 
@@ -5,10 +7,39 @@
 <a href="/beer-description">Beer Description page</a>
 
 {{#each allBeers}}
-    <a href="/beer-description/{{this._id}}" >
-        <article>
+
+<article>
+
+    <div class="beer-container">
+        <a href="/beer-description/{{this._id}}" class="beer-link">
+            <img src="{{this.image_url}}" class="img-beers" alt="image">
+            <div class="beer-attributes">
+                <p>{{this.name}}</p>
+
+                <p>Beer Type: {{this.beerType}}</p>
+
+                <p>Alc. {{this.alcoholVol}} %</p>
+
+                {{#if this.country}}
+                <p>Country: {{this.country}}</p>
+                {{else}}
+                <p>Unknown origin</p>
+                {{/if }}
+            </div>
+    </div>
+    </a>
+</article>
+</a>
+{{/each}}
+
+
+
+
+{{!-- <article>
+            
             <div class="beer-container">
-            <img src="{{this.image_url}}" alt="image">
+                <a href="/beer-description/{{this._id}}" >
+            <img src="{{this.image_url}}" class="img-beers" alt="image">
             <div class="beer-attributes">
                 <p>{{this.name}}</p>
                     {{#each this.beerType}} 
@@ -25,8 +56,6 @@
                 {{/if}}
             </div>
         </div>
-
+</a>
         </article>
-    </a>
-{{/each}}
-
+    </a> --}}
