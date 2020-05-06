@@ -187,18 +187,19 @@ siteRouter.post(
   }
 );
 
-// // GET
-// siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
-//   const user = req.session.currentUser; // is an object, remember!
-//   //now make a DB query to find this user and all the beers they like
-//   User.findById(user._id)
-//   .populate("likedBeers")
-//   .then(user => {
-//     res.render("favorite-beers");
+// GET
+siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
+  const user = req.session.currentUser; // is an object, remember!
+  //now make a DB query to find this user and all the beers they like
+  User.findById(user._id)
+  .populate("likedBeers")
+  .then(foundUser => {
+    const likedBeers = foundUser.likedBeers
+    res.render("favorite-beers", {likedBeers: likedBeers});
 
-//   })
-//   .catch((err) => console.log("error in finding fav beers", err))
-// });
+  })
+  .catch((err) => console.log("error in finding fav beers", err))
+});
 
 // GET
 // siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
