@@ -258,13 +258,24 @@ siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
 
 // GET
 siteRouter.get("/profile/edit-profile", isLoggedIn, (req, res, next) => {
-  res.render("profile/edit-profile");
+  const user = req.session.currentUser;
+  User.findById(user._id)
+  
+  .then((user) => {
+    const userProfile = user.userProfile;
+    res.render("profile/edit-profile", { user: user});
+  })
+  .catch((err) => {
+    console.log("err", err);
+  });
+
+  
 });
 
 //////////////////////// EDIT PROFILE /////////////////////////////
 //POST
 siteRouter.post("/profile/:userId/edit-profile/", isLoggedIn, parser.single("profilePicture"),(req, res) => {
-  const user = req.session.currentUser;
+  const user= req.session.currentUser;
   const {
     name,
     city,
