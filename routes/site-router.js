@@ -19,8 +19,8 @@ require("dotenv").config();
 
 
 
-
-
+// to GET liked beers in /liked-beers, we have to find User.find with filter liked beers and then render the page in similar way than all-beers
+// probably should be able to click the beers to go to description too..
 // GET
 siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
   Beer.find()
@@ -44,19 +44,18 @@ siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
 
     .then((beer) => {
       console.log("beer", beer);
-     return beer 
-    
-      
+      return beer 
     }) .catch((err) => console.log(err));
 
-    let promise2=Review.findOne({beerId:req.params.beerId})
+    let promise2=Review.find({beerId:req.params.beerId})
     // .populate("")
     .then((review) => {
       console.log("revoew", review)
-      return review
-      
+      return review 
     })
     .catch((err) => console.log(err));
+
+    //could add a 3rd promise to get user to handle liking on the page!
 
     Promise.all([promise1, promise2])
     .then((resultArray) => {
@@ -65,21 +64,32 @@ siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// // // /*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
+// // //   const {beerId}=req.params 
+// // //     Beer.findById(beerId)
+// // //     .then((beer) =>{
+// // // res.render("beer-description", {beer:beer});
+// // //     })
+// // //     .catch (err)=> console.log(err))
+// // // });
+// // // */
 
+// POST ! only post, no get here 
+siteRouter.post("/beer-description/:beerId/like", isLoggedIn, (req, res, next) => {
+  console.log("we got inside POST /like")
+  const { beerId } = req.params;
+  //const userId = req.session.currentUser._id // this ok?
+  console.log("beerId: ", beerId)
 
-
-/*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
-  const {beerId}=req.params
-  
-    Beer.findById(beerId)
-    .then((beer) =>{
-res.render("beer-description", {beer:beer});
-    })
-    .catch (err)=> console.log(err))
-  
-    
+  // let's promise to find and update our user likes
+  User.findByIdAndUpdate({_id: req.session.currentUser._id}, {$push: {likedBeers: beerId}})
+  .then(likeUpdated => {
+    console.log("likeUpdated DID IT WORK", likeUpdated)
+    //res.render("beer-description")
+    res.redirect(`/beer-description/${req.params.beerId}`);
+  })
+  .catch((err) => console.log("you cannot like :(", err));
 });
-*/
 
 // GET
 siteRouter.get("/add-beer", isLoggedIn, (req, res, next) => {
@@ -131,7 +141,6 @@ siteRouter.post(
       .then(beerCreated=>{
         return User.updateOne({_id : beerCreated.authorId}, {$push:{userBeers:beerCreated._id}})//userBeers
         // adding to the array of the user beer beerCreated._id $push
-        
       })
       .then((userUpdated) => {
         console.log("userUpdated", userUpdated)
@@ -142,10 +151,8 @@ siteRouter.post(
 );
 
 siteRouter.get("/beer-description/:beerId/add-review", isLoggedIn, (req, res, next) => {
-  
   res.render("add-review", {beerId:req.params.beerId});
 });
-
 
 //POST
 siteRouter.post(
@@ -156,16 +163,13 @@ siteRouter.post(
       review,
       rating
     } = req.body;
-    
 
     const newReview = {
-      
       beerId : req.params.beerId,
       userId : req.session.currentUser._id,
       review,
       rating
     };
-
 
     Review.create(newReview)
       // .populate("userId")// beer that the user added
@@ -173,7 +177,6 @@ siteRouter.post(
         console.log("rev created",reviewCreated)
         return User.updateOne({_id : reviewCreated.userId}, {$push:{userReviews:reviewCreated._id}})//userBeers
         // adding to the array of the user beer beerCreated._id $push
-        
 
        })
       .then((userUpdated) => {
@@ -184,28 +187,18 @@ siteRouter.post(
   }
 );
 
+// // GET
+// siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
+//   const user = req.session.currentUser; // is an object, remember!
+//   //now make a DB query to find this user and all the beers they like
+//   User.findById(user._id)
+//   .populate("likedBeers")
+//   .then(user => {
+//     res.render("favorite-beers");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// GET
-siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
-  res.render("favorite-beers");
-});
+//   })
+//   .catch((err) => console.log("error in finding fav beers", err))
+// });
 
 // GET
 // siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {

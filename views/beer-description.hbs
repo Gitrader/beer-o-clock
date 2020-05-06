@@ -1,47 +1,53 @@
 <h1>Beer Description</h1>
+<br>
+<form action="/beer-description/{{beer._id}}/like" method="post">
+    <button type="submit">Like this beer!</button>
+</form>
+
+{{!-- add somewhere if you have liked the beer or not! if it's not in the beer model, it will need more work! --}}
 
 <div> {{!-- add class here if needed --}}
     <h4>{{beer.name}}</h4>
     <img src=" {{beer.image_url}} " alt="No image available">
     <div>
-        {{#each beer.beerType}} 
-            <p>Beer Type: {{this}}</p> 
+        {{#each beer.beerType}}
+        <p>Beer Type: {{this}}</p>
         {{else}}
-            <p>No beer type specified</p> 
+        <p>No beer type specified</p>
         {{/each}}
 
         <p>Alc. {{beer.alcoholVol}} %</p>
 
         {{#if beer.description}}
-            <p> {{beer.description}} </p>
+        <p> {{beer.description}} </p>
         {{/if}}
 
         <p>EBU: {{beer.EBU}} </p>
 
         {{#if beer.country}}
-            <p>Origin: {{beer.country}}</p>
+        <p>Origin: {{beer.country}}</p>
         {{else}}
-            <p>Unknown origin</p>
+        <p>Unknown origin</p>
         {{/if}}
 
         {{#if beer.brewery}}
-            <p>Origin: {{beer.brewery}}</p>
+        <p>Origin: {{beer.brewery}}</p>
         {{else}}
-            <p>Unknown brewery</p>
+        <p>Unknown brewery</p>
         {{/if}}
 
         <p>Malts: </p>
         {{#each beer.malt}}
-            <ul>
-                <li> {{this}} </li>
-            </ul>
+        <ul>
+            <li> {{this}} </li>
+        </ul>
         {{/each}}
 
         <p>Hops: </p>
         {{#each beer.hops}}
-            <ul>
-                <li> {{this}} </li>
-            </ul>
+        <ul>
+            <li> {{this}} </li>
+        </ul>
         {{/each}}
     </div>
 
@@ -55,6 +61,10 @@
 
 <details>
     <summary>Reviews</summary>
-    <p>{{review.review}}</p>
+    {{#each review}}
+    <div>
+        <p> {{this.review}}</p>
+        {{!-- add user to review? --}}
+    </div>
+    {{/each}}
 </details>
-
