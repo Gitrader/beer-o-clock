@@ -6,7 +6,7 @@ const beerSchema = new Schema({
                     // name: { type: String, required: true, },
                     // image_url: { type: String },
   authorId: {type: mongoose.ObjectId, ref: "User"},
-  name: {type: String, required: true, },
+  name: {type: String, required: true, }, // make it unique!
   image_url: {type: String},
   beerType: [{
     type: String,

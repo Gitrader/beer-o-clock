@@ -22,6 +22,7 @@ const userSchema = new Schema({
       "no preference",
     ],
   }],
+  // maybe add true/false to liked model! so can toggle it
   likedBeers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Beer" }], //, required: true
   userBeers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Beer"}], // , required: true // should we add userID here that these can be linked?
   userReviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }], // , required: true
