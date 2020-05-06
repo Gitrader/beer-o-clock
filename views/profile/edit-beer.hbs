@@ -1,6 +1,6 @@
 <h1>Edit beer</h1>
 
-<form action='/profile/{{beer._id}}/edit-beer/' method='POST'>
+<form action='/profile/{{beer._id}}/edit-beer/' method='POST' enctype="multipart/form-data">
 
 <label for=''>Select an image :</label>
   <input type="file" name="image_url" value={{beer.image_url}}/>

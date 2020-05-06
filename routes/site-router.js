@@ -315,11 +315,11 @@ siteRouter.get("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
             // });
 
 // POST
-siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
+siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn,  parser.single("image_url"),(req, res) => {
   const { beerId } = req.params;
   const {
     name,
-    image_url,
+    // image_url,
     beerType,
     brewery,
     alcoholVol,
@@ -337,7 +337,7 @@ siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
     {
       authorId: req.session.currentUser._id,
       name,
-      image_url,
+      image_url:beer_image_url,
       beerType,
       brewery,
       alcoholVol,

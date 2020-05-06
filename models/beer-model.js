@@ -2,40 +2,42 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const beerSchema = new Schema({
-                    // authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-                    // name: { type: String, required: true, },
-                    // image_url: { type: String },
-  authorId: {type: mongoose.ObjectId, ref: "User"},
-  name: {type: String, required: true, }, // make it unique!
-  image_url: {type: String},
-  beerType: [{
-    type: String,
-    enum: [
-      "lager",
-      "pilsner",
-      "wheat beer",
-      "witbier",
-      "IPA",
-      "APA",
-      "porter",
-      "stout",
-      "gose",
-      "sour",
-      "other", // need to add if other, string
-    ],
-  }],
-  alcoholVol: {type: Number},
-  brewery: {type: String},
-  country: {type: String},
-  description: {type: String},
+  // authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  // name: { type: String, required: true, },
+  // image_url: { type: String },
+  authorId: { type: mongoose.ObjectId, ref: "User" },
+  name: { type: String, required: true }, // make it unique!
+  image_url: { type: String, required: true },
+  beerType: [
+    {
+      type: String,
+      enum: [
+        "lager",
+        "pilsner",
+        "wheat beer",
+        "witbier",
+        "IPA",
+        "APA",
+        "porter",
+        "stout",
+        "gose",
+        "sour",
+        "other", // need to add if other, string
+      ],
+    },
+  ],
+  alcoholVol: { type: Number },
+  brewery: { type: String },
+  country: { type: String },
+  description: { type: String },
   malt: [String],
   hops: [String],
-  EBU: {type: Number},
+  EBU: { type: Number },
   purchasePlace: {
     type: String,
     enum: ["supermarket", "local store", "brewery", "bar", "online"],
   }, // we should give user option to specify!
-  purchaseCountry: {type: String},
+  purchaseCountry: { type: String },
   //public: {type : Boolean, require: true},
   //foodPairing: [String] -- backlog
   // Options object
