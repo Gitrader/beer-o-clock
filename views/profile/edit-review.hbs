@@ -1,0 +1,31 @@
+<h1 class="title">Edit reviews</h1>
+
+<form action="/profile/{{review._id}}/edit-review/" method="POST" id="edit-review-form">
+'
+
+{{!-- <form action="/beer-description/{{beerId}}/add-review" method="POST" id="add-review-form"></form> --}}
+
+
+  <label for="">Beer Rate:</label> 
+
+  <select id="beer-rate" name="rating">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    
+    </select>
+
+     {{!-- <label for="">Review</label>
+  <br>
+  <input type="textarea" name="review"> --}}
+<div class="text-area">
+ <p >Review :</p>
+  <textarea name="review" form="edit-review-form">{{review.review}}</textarea>
+  </div>
+  <br>
+  <button type="submit">Save</button>
+
+  </form>

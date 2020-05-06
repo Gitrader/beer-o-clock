@@ -119,16 +119,14 @@ authRouter.post("/login", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-// GET   '/auth/logout'
-authRouter.get("/logout", (req, res) => {
-  // We remove/destroy the session record in the database
-  req.session.destroy((err) => {
-    if (err) {
-      res.render("error", { message: "Something went wrong! Yikes!" });
-    }
-    // Redirect to the page (we choose - home page)
-    res.redirect("/");
+// GET '/auth/logout'
+authRouter.get('/logout', (req, res, next) => {
+  req.session.destroy(err => {
+    res.render('auth-views/login-form', { message: 'Logged out successfully!' });
   });
 });
 
+
 module.exports = authRouter;
+
+

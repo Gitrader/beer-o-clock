@@ -1,7 +1,7 @@
 <h1>Profile Page</h1>
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Joe_Exotic_%28Santa_Rose_County_Jail%29.png"
-    alt="profile-pic">
+    alt="profile-pic" class="img-profile">
 
 <p>{{user.username}}</p>
 <p>{{user.country}}</p>
@@ -12,47 +12,52 @@
 <details>
     <summary>Added Beers</summary>
 
-    {{!-- {{#each userBeers}} --}}
-    <a href="edit-beer/{{this._id}}">
+    {{#each user.userBeers}}
+    <a href="/profile/{{this._id}}/edit-beer">
         <article>
             <div class="beer-container">
-                <img src="https://www.encopadebalon.com/3470-large_default/heineken-premium-lager-beer-bottle-24-x-330ml.jpg"
-                    alt="image">
+                <img src="{{this.image_url}}"
+                    alt="image" class="img-beers">
                 <div class="beer-attributes">
-                    <p>{{userBeers.name}}</p>
+                    <p>{{this.name}}</p>
                     <p>Beer Type</p>
                     <p>Alcohol %</p>
                     <p>Rate</p>
                     <p>Country</p>
-                    <a href="edit-beer/{{this._id}}"><i class="material-icons">settings</i></a>
+                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
 
                 </div>
             </div>
         </article>
     </a>
-    {{!-- {{/each}} --}}
+    {{/each}} 
 </details>
 
 <details>
     <summary>Added Reviews</summary>
 
-    {{!-- {{#each userReviews}} --}}
-    <a href="edit-reviews/{{this._id}}">
+    {{#each user.userReviews}} 
+    THIS IS THE ID {{this._id}}
+    <a href="/profile/{{this._id}}/edit-review">
         <article>
             <div class="beer-container">
-                <img src="https://www.encopadebalon.com/3470-large_default/heineken-premium-lager-beer-bottle-24-x-330ml.jpg"
-                    alt="image">
+                <img src="#"
+                    alt="image" class="img-beers">
                 <div class="beer-attributes">
-                    <p>{{this.name}}</p>
-                    <p>Review</p>
-                    <p>Rate</p>
-
+                    <p>{{this.review}}</p>
+                    <p>{{this.rating}}</p>
+<a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
                 </div>
             </div>
 
         </article>
     </a>
-    {{!-- {{/each}} --}}
+    {{/each}} 
 </details>
 
-<a href="edit"><i class="material-icons">settings</i></a>
+{{!-- <a href="edit"><i class="material-icons">settings</i></a> --}}
+<a href="edit-profile"><i class="material-icons">settings</i></a>
+
+<div>
+    <a href="/auth/logout"><img src="https://res.cloudinary.com/dksnrn8gi/image/upload/v1588452965/m2-project/ynkjfzvdf6fo3otxkn4e.png" alt="logout"></a>
+    </div>
