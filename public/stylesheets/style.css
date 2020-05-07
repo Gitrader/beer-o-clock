@@ -18,6 +18,13 @@ body {
   padding-bottom: 3rem;
 }
 
+/* COLOURS 
+dark green : rgb(26, 56, 54)
+light green : rgb(100, 160, 126)
+neutral : rgb(218, 219, 175)
+light orange : rgb(234, 192, 92)
+strong orange : rgb(227, 94, 37) */
+
 /* body {
   font-family: "Open Sans", Arial, sans-serif;
   min-height: 100vh;
@@ -127,7 +134,7 @@ form button {
   justify-content: center;
   -ms-flex-item-align: center;
   align-self: center;
-  background-color: #e10100ad;
+  background-color:rgb(227, 94, 37);
   color: #f3f3f3;
   font-weight: bold;
   padding: 10px;
@@ -221,75 +228,80 @@ form button {
   font-size: 18px;
 }
 
-.beer-container {
-  border: 2px solid black;
-  border-radius: 5px;
+/* ALL-BEERS */
+/* FILTER */
+.filter-beers {
+
+}
+
+/*                  starting here all-beers beer-containers */
+.beer-flex {
+  margin: 0 auto;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 50%;
-  margin: 0 auto;
-  padding: 5rem;
-  line-height: 0.2rem;
-}
-
-.added-container-review {
-  border: 1px solid rgb(227, 94, 37);
+  border: 2px solid rgb(100, 160, 126);
   border-radius: 5px;
-  margin: 3rem;
-  /* padding: 3rem; */
-  text-align: center;
 
-  padding: 15px;
-  margin: 25px 0 15px;
-  background-color: white;
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
-  box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
 }
 
-.added-container {
-  border: 1px solid rgb(227, 94, 37);
-  color: black;
-  border-radius: 5px;
-  margin: 2rem;
-  text-align: center;
-
-  padding: 15px;
-  margin: 25px 0 15px;
-  background-color: white;
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
-  box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
+.beer-flex li {
+  list-style: none;
+  color: #009578;
+  font-size: 1.2em;
+  /* what a persistent f**ker */
 }
 
-.added-container img {
-  margin: 0 auto;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  width: 10%;
+.beer-flex h3 {
+  color: rgb(26, 56, 54);
 }
 
-.added-container button {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+.beer-flex div {
+  width: 50%;
+  padding: 0 5%;
 }
 
+.beer-flex img {
+  width: 45%;
+  /* height: 10%; */
+}
 .beer-link {
   text-decoration: none;
   color: black;
 }
-
+/*                  ending here all-beers beer-containers */
+.beer-container {
+  border: 2px solid rgb(100, 160, 126);
+  border-radius: 5px;
+  width: 50%;
+  margin: 0 auto;
+  padding: 0 auto;
+  display: flex;  
+  flex-direction: row;
+}
+.beer-panels > div {
+  max-height: 80%;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; */
+}
 .beer-attributes {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: -25%;
+  /* display: flex;
+  flex-direction: column; */
+  /* justify-content: center;
+  align-items: center; */
 }
 article {
   margin-top: 3.5em;
 }
 .img-beers {
-  margin-top: 10%;
-  margin-left: 5%;
+  /* margin-top: 10%;
+  margin-left: 5%; */
   /* margin: 1em; */
   width: 5%;
   /* max-width:8em; */
@@ -541,4 +553,41 @@ meter[value="4"]::-moz-meter-bar { background: green; }
 .profile-stat-count,
 .profile-edit-btn {
   font-weight: 600;
+}
+
+.added-container-review {
+  border: 1px solid rgb(227, 94, 37);
+  border-radius: 5px;
+  margin: 3rem;
+  /* padding: 3rem; */
+  text-align: center;
+  padding: 15px;
+  margin: 25px 0 15px;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
+  box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
+}
+.added-container {
+  border: 1px solid rgb(227, 94, 37);
+  color: black;
+  border-radius: 5px;
+  margin: 2rem;
+  text-align: center;
+  padding: 15px;
+  margin: 25px 0 15px;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
+  box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
+}
+.added-container img {
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  width: 10%;
+}
+.added-container button {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }

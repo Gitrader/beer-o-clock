@@ -3,7 +3,7 @@
 <h1 class="title">ALL BEERS PAGE</h1>
 
 {{!-- form for showing beers --}}
-<details>
+<details class="filter-beers">
     <summary>Filter beer selection:</summary>
     <form action="/all-beers" method="get">
 
@@ -39,30 +39,50 @@
     </form>
 </details>
 
+{{!-- <div class="beer-flex"> TEST !
+
+    <div>
+        <img src="https://usercontent2.hubstatic.com/8615653_f520.jpg" alt="kitty">
+    </div>
+
+    <div>
+        <ul>
+            <li>text</li>
+            <li>more text</li>
+        </ul>
+    </div>
+
+</div> --}}
+
 {{#each allBeers}}
-<article>
-    <div class="beer-container">
-        <a href="/beer-description/{{this._id}}" class="beer-link">
-            <img src="{{this.image_url}}" class="img-beers" alt="image">
-            <div class="beer-attributes">
-                <p>{{this.name}}</p>
+    <a href="/beer-description/{{this._id}}" class="beer-link">
+    <div class="beer-flex">
+        <div>
+                <img src="{{this.image_url}}" class="img-beers" alt="image">
+        </div>
+
+        <div>
+            <ul>
+                <li> <h3>{{this.name}}</h3></li>
 
                 {{#if this.beerType}}
-                <p>Beer Type: {{this.beerType}}</p>
+                <li>Beer Type: {{this.beerType}}</li>
                 {{/if}}
 
-                <p>Alc. {{this.alcoholVol}} %</p>
+                <li>Alc. {{this.alcoholVol}} %</li>
 
                 {{#if this.country}}
-                <p>Origin: {{this.country}}</p>
+                <li>Origin: {{this.country}}</li>
                 {{/if }}
 
                 {{#if this.brewery}}
-                <p>Brewery: {{this.brewery}}</p>
+                <li>Brewery: {{this.brewery}}</li>
                 {{/if }}
-            </div>
-        </a>
+
+
+            </ul>
+        </div>
+
     </div>
-</article>
-{{!-- </a> --}}
+    </a>
 {{/each}}
