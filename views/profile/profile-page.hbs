@@ -1,63 +1,125 @@
-<h1>Profile Page</h1>
+<h1 class="title">My profile</h1>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Joe_Exotic_%28Santa_Rose_County_Jail%29.png"
-    alt="profile-pic" class="img-profile">
+<header>
 
-<p>{{user.username}}</p>
-<p>{{user.country}}</p>
-<p>{{user.city}}</p>
-<p>{{user.beerPreference}}</p>
+    <div class="container">
 
+        <div class="profile">
 
-<details>
-    <summary>Added Beers</summary>
+            <div class="profile-image">
 
-    {{#each user.userBeers}}
-    <a href="/profile/{{this._id}}/edit-beer">
-        <article>
-            <div class="beer-container">
-                <img src="{{this.image_url}}"
-                    alt="image" class="img-beers">
-                <div class="beer-attributes">
-                    <p>{{this.name}}</p>
-                    <p>Beer Type</p>
-                    <p>Alcohol %</p>
-                    <p>Rate</p>
-                    <p>Country</p>
-                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
+                <img src="{{user.profilePicture}}" alt="profile-pic" class="img-profile">
 
-                </div>
-            </div>
-        </article>
-    </a>
-    {{/each}} 
-</details>
-
-<details>
-    <summary>Added Reviews</summary>
-
-    {{#each user.userReviews}} 
-    THIS IS THE ID {{this._id}}
-    <a href="/profile/{{this._id}}/edit-review">
-        <article>
-            <div class="beer-container">
-                <img src="#"
-                    alt="image" class="img-beers">
-                <div class="beer-attributes">
-                    <p>{{this.review}}</p>
-                    <p>{{this.rating}}</p>
-<a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
-                </div>
             </div>
 
-        </article>
-    </a>
-    {{/each}} 
-</details>
+            <div class="profile-user-settings">
 
-{{!-- <a href="edit"><i class="material-icons">settings</i></a> --}}
-<a href="edit-profile"><i class="material-icons">settings</i></a>
+                <h1 class="profile-user-name">{{user.username}}</h1>
 
-<div>
-    <a href="/auth/logout"><img src="https://res.cloudinary.com/dksnrn8gi/image/upload/v1588452965/m2-project/ynkjfzvdf6fo3otxkn4e.png" alt="logout"></a>
+                <a href="edit-profile"><button class="btn profile-edit-btn">Edit Profile</button><a>
+
+                        <a href="/auth/logout"><button class="btn profile-edit-btn">Log Out</button><a>
+
+            </div>
+
+            <div class="profile-stats">
+
+                <ul>
+
+                    <li><span class="profile-stat-count">{{user.city}}</span> </li>
+                    <li><span class="profile-stat-count">{{user.country}}</span> </li>
+                    <li><span class="profile-stat-count">30</span> followers</li>
+                    <li><span class="profile-stat-count">22</span> following</li>
+
+                </ul>
+                <div class="profile-bio">
+                    <p><span class="profile-real-name">Beer Preference</span> {{user.beerPreference}}</p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <!-- End of profile section -->
+
     </div>
+
+
+    {{!-- <section id="user-info">
+    <article class="container-info">
+
+        <img src="{{user.profilePicture}}" alt="profile-pic" class="img-profile">
+    </article>
+    
+<article class="container-info">
+    <p>Username: {{user.username}}</p>
+    <p>City: {{user.city}}</p>
+    <p>Country: {{user.country}}</p>
+    <p>Beer preference: {{user.beerPreference}}</p>
+    </article> --}}
+
+
+    {{!-- </section> --}}
+
+    {{!-- <section> --}}
+
+
+    <section class="section-added-infos">
+        <article class="container-added-infos">
+            <details>
+                <summary>Added Beers</summary>
+
+                {{#each user.userBeers}}
+                <a href="/profile/{{this._id}}/edit-beer">
+                    <div>
+                        <img src="{{this.image_url}}" alt="image" class="img-beers">
+                        <div>
+                            {{!-- class="beer-attributes" --}}
+
+                            <h1>USE THE SAME FORMATING THAN ALL BEERS <h1>
+                                    <p>{{this.name}}</p>
+                                    <p>{{this.beerType}}</p>
+                                    <p>{{this.alcoholVol}}</p>
+                                    <p>{{this.rating}}</p>
+                                    <p>{{this.country}}</p>
+                                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
+
+                        </div>
+                    </div>
+
+                </a>
+                {{/each}}
+            </details>
+        </article>
+
+
+
+
+
+
+        <article class="container-added-infos">
+            <details>
+                <summary>Added Reviews</summary>
+
+                {{#each user.userReviews}}
+
+
+                <div>
+                    {{!-- class="beer-container" --}}
+
+                    <div>
+                        {{!-- class="beer-attributes" --}}
+                        <p>{{this.beerId}}</p>
+                        <p>{{this.review}}</p>
+                        <p>{{this.rating}}</p>
+                        <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
+                    </div>
+                </div>
+
+
+                </a>
+                {{/each}}
+            </details>
+        </article>
+    </section>

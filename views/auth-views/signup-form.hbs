@@ -1,3 +1,6 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+
 <h1 class="title">SIGNUP PAGE</h1>
 
 <form id="form" action='/auth/signup' method='POST'>
@@ -7,9 +10,12 @@
   <input type='text' name='username' required>
 
 
-  <label for=''>Password :</label>
+  <label for='password'>Password :</label>
 
   <input id="myPassword" type='password' name='password' required>
+  {{!-- <input type="password"  id="password" required>
+  <meter max="4" id="password-strength-meter"></meter>
+<p id="password-strength-text"></p> --}}
 
   <label for=''>City :</label>
 

@@ -1,19 +1,19 @@
 <h1 class="title"> Add beer page</h1>
 
 <form action="/add-beer" method="POST" enctype="multipart/form-data">
-  
+
   {{!-- <label for=''>AuthorId :</label>
   <input type='text' name='authorId'>  --}}
 
- <label for=''>Select an image (required) :</label>
-  <input type="file" name="image_url" required/>
- 
-
-<label for=''>Beer name :</label>
-  <input type='text' name='name' required/>  
+  <label for=''>Select an image (required) :</label>
+  <input type="file" name="image_url" required />
 
 
-  <label for="">Beer Type:</label> 
+  <label for=''>Beer name :</label>
+  <input type='text' name='name' required />
+
+
+  <label for="">Beer Type:</label>
 
   <select id="beer-type" name="beerType">
     <option value="lager">Lager</option>
@@ -25,8 +25,8 @@
     <option value="stout">Stout</option>
     <option value="gose">Gose</option>
     <option value="sour">Sour</option>
-    
-    </select>
+
+  </select>
 
   {{!-- <div>
     <input type="checkbox" id="lager" name="beerPreference" value="lager">
@@ -65,22 +65,22 @@
     <label for="">Sour</label>
   </div>
    --}}
-   {{!-- <div>
+  {{!-- <div>
     <input type="checkbox" id="no-preference" name="beerPreference" value="no preference">
     <label for="">No preference</label>
   </div>  --}}
 
 
-<label for=''>Brewery :</label>
-  <input type='text' name='brewery'> 
+  <label for=''>Brewery :</label>
+  <input type='text' name='brewery'>
 
   <label for=''>Alcohol Volume (%) :</label>
-  <input type='text' name='alcoholVol' required> 
+  <input type='number' step="0.01" name='alcoholVol' required>
 
   <label for=''>Country :</label>
   <input type='text' name='country'>
 
- <label for=''>Description :</label>
+  <label for=''>Description :</label>
   <input type='text' name='description'>
 
   <label for=''>Malt:</label>
@@ -90,20 +90,20 @@
   <input type='text' name='hops'>
 
   <label for=''>EBU:</label>
-  <input type='text' name='EBU'>
+  <input type='number' step="0.01" name='EBU'>
 
-<label for="">Purchased place:</label>
+  <label for="">Purchased place:</label>
   <select id="purchasePlace" name="purchasePlace" required>
     <option value="supermarket">Supermarket</option>
     <option value="local store">Local store</option>
     <option value="brewery">Brewery</option>
     <option value="bar">Bar</option>
     <option value="online">Online</option>
-    </select> 
+  </select>
 
-<label for=''>Purchased country:</label>
+  <label for=''>Purchased country:</label>
   <input type='text' name='purchaseCountry'>
 
-<button type="submit">Add</button>
- 
+  <button type="submit">Add</button>
+
 </form>

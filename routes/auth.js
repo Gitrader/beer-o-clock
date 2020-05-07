@@ -1,6 +1,7 @@
 const express = require("express");
 const authRouter = express.Router();
 const User = require("./../models/user-model");
+const zxcvbn = require('zxcvbn');
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -28,6 +29,17 @@ authRouter.post("/signup", (req, res, next) => {
     });
     return; // stops the execution of the function furhter
   }
+  // 2.2 Verify the password strength
+  // const passwordStrength = zxcvbn(password).score;
+
+  // console.log("zxcvbn(password) :>> ", zxcvbn(password));
+  // console.log("passwordStrenth :>> ", passwordStrength);
+  // if (passwordStrength < 4) {
+  //   res.render("auth-views/signup-form"
+  //   //, {errorMessage: zxcvbn(password).feedback.warning,}
+  //   );
+  //   return;
+  // }
   // 3. Check if the username is not taken
   User.findOne({ username })
     .then((userObj) => {
@@ -44,6 +56,7 @@ authRouter.post("/signup", (req, res, next) => {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashedPassword = bcrypt.hashSync(password, salt);
 
+ 
         // 5. Create new user in DB, saving the encrypted password
         User.create({
           username,

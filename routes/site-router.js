@@ -15,19 +15,46 @@ require("dotenv").config();
 //   .catch((err) => console.log(err));
 // }
 
-
-
-
-
 // to GET liked beers in /liked-beers, we have to find User.find with filter liked beers and then render the page in similar way than all-beers
 // probably should be able to click the beers to go to description too..
 // GET
 siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
-  Beer.find()
-    .then((allBeers) => {
-      res.render("all-beers", { allBeers: allBeers });
-    })
-    .catch((err) => console.log(err));
+  console.log("req.query unfiltered ", req.query)
+  //Object.keys(req.query).length !== 0 
+  if (Object.keys(req.query).length !== 0) {
+    //const {country, beerType} = req.query
+    const userQuery = {...req.query} // { country: '', beerType: 'lager' }
+    console.log("query: ", userQuery)
+    // console.log("keys + values",Object.entries(userQuery))
+    // let keys = Object.keys(userQuery)
+    // console.log("keys: ",keys)
+    //let values = query.values;
+
+    // keys.forEach(key => {
+    //   if (key.value === "") { //  || key.value === null
+    //     console.log("key: ", key, "value: ", key.value)
+    //     delete userQuery.key
+    //   }      
+    // });
+    // get rid of empty values in query keys
+    for (const [key, value] of Object.entries(userQuery)) {
+      if(value === "") delete userQuery[key]
+    }
+    console.log("userQuery after delete", userQuery)
+
+    Beer.find(userQuery)
+    .then( resArray => {
+      res.render("all-beers", { allBeers: resArray }) // this way around!!
+    } )
+    .catch()
+  }
+  else {
+    Beer.find()
+      .then((allBeers) => {
+        res.render("all-beers", { allBeers: allBeers });
+      })
+      .catch((err) => console.log(err));
+  }
 });
 
 // // GET
@@ -44,31 +71,34 @@ siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
 
     .then((beer) => {
       console.log("beer", beer);
-      return beer 
-    }) .catch((err) => console.log(err));
-
-    let promise2=Review.find({beerId:req.params.beerId})
-    // .populate("")
-    .then((review) => {
-      console.log("revoew", review)
-      return review 
+      return beer;
     })
     .catch((err) => console.log(err));
 
-    //could add a 3rd promise to get user to handle liking on the page!
+  let promise2 = Review.find({ beerId: req.params.beerId })
+    // .populate("")
+    .then((review) => {
+      console.log("revoew", review);
+      return review;
+    })
+    .catch((err) => console.log(err));
 
-    Promise.all([promise1, promise2])
+  //could add a 3rd promise to get user to handle liking on the page!
+  // return true(liked already, show unlike!) / false (not liked, show like button)
+
+  Promise.all([promise1, promise2])
     .then((resultArray) => {
       res.render("beer-description", {
         beer: resultArray[0],
         review: resultArray[1],
+        //liked: resultArray[2]
       });
     })
     .catch((err) => console.log(err));
 });
 
 // // // /*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
-// // //   const {beerId}=req.params 
+// // //   const {beerId}=req.params
 // // //     Beer.findById(beerId)
 // // //     .then((beer) =>{
 // // // res.render("beer-description", {beer:beer});
@@ -77,22 +107,29 @@ siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
 // // // });
 // // // */
 
-// POST ! only post, no get here 
-siteRouter.post("/beer-description/:beerId/like", isLoggedIn, (req, res, next) => {
-  console.log("we got inside POST /like")
-  const { beerId } = req.params;
-  //const userId = req.session.currentUser._id // this ok?
-  console.log("beerId: ", beerId)
+// POST ! only post, no get here
+siteRouter.post(
+  "/beer-description/:beerId/like",
+  isLoggedIn,
+  (req, res, next) => {
+    console.log("we got inside POST /like");
+    const { beerId } = req.params;
+    //const userId = req.session.currentUser._id // this ok?
+    console.log("beerId: ", beerId);
 
-  // let's promise to find and update our user likes
-  User.findByIdAndUpdate({_id: req.session.currentUser._id}, {$push: {likedBeers: beerId}})
-  .then(likeUpdated => {
-    console.log("likeUpdated DID IT WORK", likeUpdated)
-    //res.render("beer-description")
-    res.redirect(`/beer-description/${req.params.beerId}`);
-  })
-  .catch((err) => console.log("you cannot like :(", err));
-});
+    // let's promise to find and update our user likes
+    User.findByIdAndUpdate(
+      { _id: req.session.currentUser._id },
+      { $push: { likedBeers: beerId } }
+    )
+      .then((likeUpdated) => {
+        console.log("likeUpdated DID IT WORK", likeUpdated);
+        //res.render("beer-description")
+        res.redirect(`/beer-description/${req.params.beerId}`);
+      })
+      .catch((err) => console.log("you cannot like :(", err));
+  }
+);
 
 // GET
 siteRouter.get("/add-beer", isLoggedIn, (req, res, next) => {
@@ -100,7 +137,10 @@ siteRouter.get("/add-beer", isLoggedIn, (req, res, next) => {
 });
 
 // POST
-siteRouter.post("/add-beer", isLoggedIn, parser.single("image_url"),
+siteRouter.post(
+  "/add-beer",
+  isLoggedIn,
+  parser.single("image_url"),
   (req, res, next) => {
     // thanks to multer, you have now access to the new object "req.file"
     const {
@@ -153,9 +193,13 @@ siteRouter.post("/add-beer", isLoggedIn, parser.single("image_url"),
   }
 );
 
-siteRouter.get("/beer-description/:beerId/add-review", isLoggedIn, (req, res, next) => {
-  res.render("add-review", {beerId:req.params.beerId});
-});
+siteRouter.get(
+  "/beer-description/:beerId/add-review",
+  isLoggedIn,
+  (req, res, next) => {
+    res.render("add-review", { beerId: req.params.beerId });
+  }
+);
 
 //POST
 siteRouter.post(
@@ -194,20 +238,18 @@ siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser; // is an object, remember!
   //now make a DB query to find this user and all the beers they like
   User.findById(user._id)
-  .populate("likedBeers")
-  .then(foundUser => {
-    const likedBeers = foundUser.likedBeers
-    res.render("favorite-beers", {likedBeers: likedBeers});
-
-  })
-  .catch((err) => console.log("error in finding fav beers", err))
+    .populate("likedBeers")
+    .then((foundUser) => {
+      const likedBeers = foundUser.likedBeers;
+      res.render("favorite-beers", { likedBeers: likedBeers });
+    })
+    .catch((err) => console.log("error in finding fav beers", err));
 });
 
 // GET             THIS IS NOT USED
 // siteRouter.get("/private", isLoggedIn, (req, res, next) => {
 //   res.render("private");
 // });
-
 
 // GET
 // siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
@@ -232,10 +274,7 @@ siteRouter.get("/favorite-beers", isLoggedIn, (req, res, next) => {
 
 // AFTER EDITING THE USER IN DB, SAVE THE UPDATED USER IN req.session.currentUser
 
-
 /////////////// PROFILE ////////////
-
-
 
 // GET
 siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
@@ -246,7 +285,7 @@ siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
     // likedBeers can be added here too
     .then((user) => {
       const userReviews = user.userReviews;
-      res.render("profile/profile-page", { user: user});
+      res.render("profile/profile-page", { user: user });
     })
     .catch((err) => {
       console.log("eer", err);
@@ -254,49 +293,64 @@ siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
 });
 
 // GET
-siteRouter.get("/profile/edit-profile", isLoggedIn, (req, res, next) => {
+siteRouter.get("/profile/edit-profile/", isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser;
   User.findById(user._id)
-  
-  .then((user) => {
-    const userProfile = user.userProfile;
-    res.render("profile/edit-profile", { user: user});
-  })
-  .catch((err) => {
-    console.log("err", err);
-  });
 
-  
+    .then((user) => {
+      const userProfile = user.userProfile;
+      res.render("profile/edit-profile", { user: user });
+    })
+    .catch((err) => {
+      console.log("err", err);
+    });
 });
 
 //////////////////////// EDIT PROFILE /////////////////////////////
 //POST
-siteRouter.post("/profile/:userId/edit-profile/", isLoggedIn, parser.single("profilePicture"),(req, res) => {
-  const user= req.session.currentUser;
-  const {
-    name,
-    city,
-    country,
-    beerPreference,
-    } = req.body;
-    const profile_image_url = req.file.secure_url;
-  User.updateOne(
-    { _id: userId },
-    {
-      name,
-      profilePicture : profile_image_url,
-      city,
-      country,
-      beerPreference,
-    }
-  )
-    .then(() => {
-      res.redirect(`/profile/profile-page`); 
-    })
-    .catch((err) => console.log(err));
-});
+siteRouter.post(
+  "/profile/:userId/edit-profile/",
+  isLoggedIn,
+  parser.single("profilePicture"),
+  (req, res) => {
+    const userId = req.session.currentUser._id;
+    console.log("userId",userId)
 
-
+    // const profile_image_url = req.file.secure_url;
+    User.findById(userId)
+      //Start//
+      .then((user) => {
+        let previousProfileImage = user.profilePicture;
+        let profile_image_url = req.file
+          ? req.file.secure_url
+          : previousProfileImage;
+        return profile_image_url;
+      })
+      .then((profile_image_url) => {
+        const userId = req.session.currentUser._id;
+        const { name, city, country, beerPreference } = req.body;
+        console.log("req.body", req.body);
+        return User.updateOne(
+          { _id: userId },
+          {
+            name,
+            profilePicture: profile_image_url,
+            city,
+            country,
+            beerPreference,
+          },
+          {
+            new: true,
+          }
+        );
+      })
+      .then((updatedUser) => {
+        console.log("updated user", updatedUser);
+        res.redirect(`/profile/profile-page`);
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 /////////////////////// EDIT BEER ///////////////////////////////
 
@@ -317,55 +371,74 @@ siteRouter.get("/profile/:beerId/edit-beer/", isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-            // GET
-            // siteRouter.get("/profile/edit-beer", isLoggedIn, (req, res, next) => {
-            //   res.render("profile/edit-beer");
-            // });
+// GET
+// siteRouter.get("/profile/edit-beer", isLoggedIn, (req, res, next) => {
+//   res.render("profile/edit-beer");
+// });
 
 // POST
-siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn,  parser.single("image_url"),(req, res) => {
-  const { beerId } = req.params;
-  const {
-    name,
-    // image_url,
-    beerType,
-    //image_url: beer_image_url,
-    brewery,
-    alcoholVol,
-    country,
-    description,
-    malt,
-    hops,
-    EBU,
-    purchasePlace,
-    purchaseCountry,
-  } = req.body;
-  const beer_image_url = req.file.secure_url;
-  Beer.updateOne(
-    { _id: beerId },
-    {
-      authorId: req.session.currentUser._id,
-      name,
-      image_url:beer_image_url,
-      beerType,
-      brewery,
-      alcoholVol,
-      country,
-      description,
-      malt,
-      hops,
-      EBU,
-      purchasePlace,
-      purchaseCountry,
-    }
-  )
-    .then(() => {
-      res.redirect(`/profile/profile-page`); 
-    })
-    .catch((err) => console.log(err));
-});
-
-
+siteRouter.post(
+  "/profile/:beerId/edit-beer/",
+  isLoggedIn,
+  parser.single("image_url"),
+  (req, res) => {
+    const { beerId } = req.params;
+    Beer.findById(beerId)
+      .then((beer) => {
+        let previousImage = beer.image_url;
+        let beer_image_url = req.file ? req.file.secure_url : previousImage;
+        return beer_image_url;
+      })
+      .then((beer_image_url) => {
+        const { beerId } = req.params;
+        const {
+          name,
+          // image_url,
+          beerType,
+          //image_url: beer_image_url,
+          brewery,
+          alcoholVol,
+          country,
+          description,
+          malt,
+          hops,
+          EBU,
+          purchasePlace,
+          purchaseCountry,
+        } = req.body;
+        console.log("req.body", req.body);
+        console.log("beerID", beerId);
+        const maltsArr = malt.split(",");
+        const hopsArr = hops.split(",");
+        return Beer.update(
+          { _id: beerId },
+          {
+            authorId: req.session.currentUser._id,
+            name,
+            image_url: beer_image_url,
+            beerType,
+            brewery,
+            alcoholVol,
+            country,
+            description,
+            malt: maltsArr,
+            hops: hopsArr,
+            EBU,
+            purchasePlace,
+            purchaseCountry,
+          },
+          {
+            new: true,
+          }
+        );
+      })
+      .then((updatedBeer) => {
+        console.log("updated beer", updatedBeer);
+        res.redirect(`/profile/profile-page`);
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 // POST
 // siteRouter.post("/profile/edit-reviews/:reviewId", isLoggedIn, (req, res) => {
@@ -391,44 +464,46 @@ siteRouter.post("/profile/:beerId/edit-beer/", isLoggedIn,  parser.single("image
 //     .catch((err) => console.log(err));
 // });
 
-
-
 //////REVIEW EXAMPLE//////
 // GET
-siteRouter.get("/profile/:reviewId/edit-review/", isLoggedIn, (req, res, next) => {
-  const { reviewId } = req.params
-  console.log("THIS OUR REVIEW ID", reviewId)
+siteRouter.get(
+  "/profile/:reviewId/edit-review/",
+  isLoggedIn,
+  (req, res, next) => {
+    const { reviewId } = req.params;
+    console.log("THIS OUR REVIEW ID", reviewId);
 
-  Review.findById(reviewId)
-  .then(review=>{
-    res.render("profile/edit-review", {review:review});
-  })
-  .catch((err) => console.log("Find review error",err));
-});
+    Review.findById(reviewId)
+      .then((review) => {
+        res.render("profile/edit-review", { review: review });
+      })
+      .catch((err) => console.log("Find review error", err));
+  }
+);
 
 // POST
 siteRouter.post("/profile/:reviewId/edit-review/", isLoggedIn, (req, res) => {
   const { reviewId } = req.params;
   const { rating, review } = req.body;
 
-  Review.updateOne({ _id: reviewId },{rating,review})
+  Review.updateOne({ _id: reviewId }, { rating, review })
     .then(() => {
-      res.redirect(`/profile/profile-page`); 
+      res.redirect(`/profile/profile-page`);
     })
     .catch((err) => console.log(err));
 });
 
 // POST DELETE BEER! will be a form inside edit-beer
 siteRouter.post("/profile/:beerId/delete", isLoggedIn, (req, res, next) => {
-  console.log("heeeeey from get delete route")
+  console.log("heeeeey from get delete route");
   const { beerId } = req.params;
 
   Beer.findByIdAndRemove(beerId)
-  .then(() => {
-    console.log("this is after deleting a beer!")
-    res.redirect("/profile/profile-page")
-  })
-  .catch((err) => console.log("error deleting beer: ",err))
-})
+    .then(() => {
+      console.log("this is after deleting a beer!");
+      res.redirect("/profile/profile-page");
+    })
+    .catch((err) => console.log("error deleting beer: ", err));
+});
 
 module.exports = siteRouter;
