@@ -17,6 +17,14 @@ a {
   
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: 370px; */
+}
+
 /* .title{
   text-align: center;
 } */

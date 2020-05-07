@@ -1,24 +1,39 @@
 <h1>Profile Page</h1>
 
-<img src="{{user.profilePicture}}"
-    alt="profile-pic" class="img-profile">
 
-<p>{{user.username}}</p>
-<p>{{user.country}}</p>
-<p>{{user.city}}</p>
-<p>{{user.beerPreference}}</p>
+{{!-- <section id="user-info"> --}}
+<article class="container">
 
+    <img src="{{user.profilePicture}}" alt="profile-pic" class="img-profile">
 
-<details>
-    <summary>Added Beers</summary>
+    <p>Username: {{user.username}}</p>
+    <p>City: {{user.city}}</p>
+    <p>Country: {{user.country}}</p>
+    <p>Beer preference: {{user.beerPreference}}</p>
+</article>
+{{!-- </section> --}}
 
-    {{#each user.userBeers}}
-    <a href="/profile/{{this._id}}/edit-beer">
-        <article>
-            <div class="beer-container">
-                <img src="{{this.image_url}}"
-                    alt="image" class="img-beers">
-                <div class="beer-attributes">
+<article class="container">
+    {{!-- <a href="edit"><i class="material-icons">settings</i></a> --}}
+    <a href="edit-profile"><i class="material-icons">settings</i></a>
+</article>
+
+<article class="container">
+    <div>
+        <a href="/auth/logout"><button>LOG OUT</button></a>
+    </div>
+</article>
+
+<article class="container">
+    <details>
+        <summary>Added Beers</summary>
+
+        {{#each user.userBeers}}
+        <a href="/profile/{{this._id}}/edit-beer">
+            <div>
+                <img src="{{this.image_url}}" alt="image" class="img-beers">
+                <div>
+                    {{!-- class="beer-attributes" --}}
                     <p>{{this.name}}</p>
                     <p>Beer Type</p>
                     <p>Alcohol %</p>
@@ -28,36 +43,42 @@
 
                 </div>
             </div>
-        </article>
-    </a>
-    {{/each}} 
-</details>
 
-<details>
-    <summary>Added Reviews</summary>
+        </a>
+        {{/each}}
+    </details>
+</article>
 
-    {{#each user.userReviews}} 
-    THIS IS THE ID {{this._id}}
-    <a href="/profile/{{this._id}}/edit-review">
-        <article>
-            <div class="beer-container">
-                <img src="#"
-                    alt="image" class="img-beers">
-                <div class="beer-attributes">
+
+
+
+
+
+<article class="container">
+    <details>
+        <summary>Added Reviews</summary>
+
+        {{#each user.userReviews}}
+        
+        <a href="/profile/{{this._id}}/edit-review">
+            <div>
+                {{!-- class="beer-container" --}}
+                <img src="#" alt="image" class="img-beers">
+                <div>
+                    {{!-- class="beer-attributes" --}}
                     <p>{{this.review}}</p>
                     <p>{{this.rating}}</p>
-<a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
+                    <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
                 </div>
             </div>
 
-        </article>
-    </a>
-    {{/each}} 
-</details>
 
-{{!-- <a href="edit"><i class="material-icons">settings</i></a> --}}
-<a href="edit-profile"><i class="material-icons">settings</i></a>
+        </a>
+        {{/each}}
+    </details>
+</article>
 
-<div>
-    <a href="/auth/logout"><img src="https://res.cloudinary.com/dksnrn8gi/image/upload/v1588452965/m2-project/ynkjfzvdf6fo3otxkn4e.png" alt="logout"></a>
-    </div>
+
+
+
+
