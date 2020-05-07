@@ -11,11 +11,11 @@
     <img src=" {{beer.image_url}} " alt="No image available">
 
     <div>
-        {{#each beer.beerType}}
-        <p>Beer Type: {{this}}</p>
+        {{#if beer.beerType}}
+        <p>Beer Type: {{beer.beerType}}</p>
         {{else}}
         <p>No beer type specified</p>
-        {{/each}}
+        {{/if}}
 
         <p>Alc. {{beer.alcoholVol}} %</p>
 

@@ -8,7 +8,7 @@ const beerSchema = new Schema({
   authorId: { type: mongoose.ObjectId, ref: "User" },
   name: { type: String, required: true }, // make it unique!
   image_url: { type: String, required: true },
-  beerType: [
+  beerType: 
     {
       type: String,
       enum: [
@@ -25,14 +25,14 @@ const beerSchema = new Schema({
         "other", // need to add if other, string
       ],
     },
-  ],
-  alcoholVol: { type: Number },
+  
+  alcoholVol: { type: Number ,default:0},
   brewery: { type: String },
   country: { type: String },
   description: { type: String },
-  malt: [String],
-  hops: [String],
-  EBU: { type: Number },
+  malt: [{type :String}],
+  hops: [{type :String}],
+  EBU: { type: Number ,default:0},
   purchasePlace: {
     type: String,
     enum: ["supermarket", "local store", "brewery", "bar", "online"],
