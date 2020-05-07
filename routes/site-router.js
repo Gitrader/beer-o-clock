@@ -83,29 +83,28 @@ siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
     })
     .catch((err) => console.log(err));
 
+  let promise3 = User.findById(req.session.currentUser._id)
+  .then((user) => {
+    if (user.likedBeers.includes(beerId)) {
+      console.log("this is users liked beers:", user.likedBeers)
+      return true
+    }
+  })
+  .catch((err) => console.log("error finding user in beer-descr.",err))
+
   //could add a 3rd promise to get user to handle liking on the page!
   // return true(liked already, show unlike!) / false (not liked, show like button)
 
-  Promise.all([promise1, promise2])
+  Promise.all([promise1, promise2, promise3])
     .then((resultArray) => {
       res.render("beer-description", {
         beer: resultArray[0],
         review: resultArray[1],
-        //liked: resultArray[2]
+        liked: resultArray[2]
       });
     })
     .catch((err) => console.log(err));
 });
-
-// // // /*---> siteRouter.get("/beer-description/:beerId" , isLoggedIn, (req, res, next) => {
-// // //   const {beerId}=req.params
-// // //     Beer.findById(beerId)
-// // //     .then((beer) =>{
-// // // res.render("beer-description", {beer:beer});
-// // //     })
-// // //     .catch (err)=> console.log(err))
-// // // });
-// // // */
 
 // POST ! only post, no get here
 siteRouter.post(
@@ -120,7 +119,7 @@ siteRouter.post(
     // let's promise to find and update our user likes
     User.findByIdAndUpdate(
       { _id: req.session.currentUser._id },
-      { $push: { likedBeers: beerId } }
+      { $push: { likedBeers: beerId } } // for unlike just the same with $pull
     )
       .then((likeUpdated) => {
         console.log("likeUpdated DID IT WORK", likeUpdated);
@@ -128,6 +127,30 @@ siteRouter.post(
         res.redirect(`/beer-description/${req.params.beerId}`);
       })
       .catch((err) => console.log("you cannot like :(", err));
+  }
+);
+
+// POST unlike yess this wörks!!!
+siteRouter.post(
+  "/beer-description/:beerId/unlike",
+  isLoggedIn,
+  (req, res, next) => {
+    console.log("we got inside POST /UNlike");
+    const { beerId } = req.params;
+    //const userId = req.session.currentUser._id // this ok?
+    console.log("beerId: ", beerId);
+
+    // let's promise to find and update our user likes
+    User.findByIdAndUpdate(
+      { _id: req.session.currentUser._id },
+      { $pull: { likedBeers: beerId } } // ! $pull
+    )
+      .then((unliked) => {
+        console.log("unliked DID IT WORK", unliked);
+        //res.render("beer-description")
+        res.redirect(`/beer-description/${req.params.beerId}`);
+      })
+      .catch((err) => console.log("you cannot unlike :(", err));
   }
 );
 
