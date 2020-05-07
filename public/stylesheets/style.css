@@ -226,7 +226,31 @@ form button {
   border-radius: 5px;
   width: 50%;
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 5rem;
+  line-height: 0.2rem;
+}
+
+
+
+.added-container{
+  border: 1px solid black;
+  margin:2rem;
+  text-align: center;
+
+}
+
+.added-container img{
+  margin: 0 auto ;
+  margin-top:1rem;
+  margin-bottom: 0.5rem;
+  width: 10%;
+
+}
+
+.added-container button{
+  margin-top: 2rem;
+  margin-bottom:2rem;
+
 }
 
 .beer-link {
@@ -299,7 +323,8 @@ textarea {
   
  
 }
-.block-added-infos a{text-decoration:none;
+.block-added-infos a{
+  text-decoration:none;
   color:black;
 }
 /* meter {
@@ -384,9 +409,9 @@ meter[value="4"]::-moz-meter-bar { background: green; }
 
 
 
-img {
+/* img {
   display: block;
-}
+} */
 
 .container {
   max-width: 93.5rem;

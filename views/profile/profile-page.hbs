@@ -47,7 +47,7 @@
 
 
 
-    {{!-- NOT DISPLAYED --}}
+    {{!-- NOT DISPLAYED ---------------------------------------------------------------}}
 
     <section class="section-added-infos">
         <article class="container-added-infos">
@@ -80,74 +80,76 @@
             </details>
         </article>
 
-        {{!-- NOT DISPLAYED --}}
+        {{!-- NOT DISPLAYED --------------------------------------------------------------------}}
 
 
 
-<section class="section-added-infos">
+        <section class="section-added-infos">
 
-        <article class="container-added-infos">
+            <article class="container-added-infos">
 
-            <details>
-                <summary>Added Beers</summary>
+                <details>
+                    <summary>Added Beers</summary>
 
-                {{#each user.userBeers}}
-
-                <a href="/profile/{{this._id}}/edit-beer">
-                    <div class="block-added-infos">
-                        <img src="{{this.image_url}}" alt="image" class="img-beers">
-                        <div>
-                            {{!-- class="beer-attributes" --}}
-
-                            
-                            <div class="block-added-infos">
+                    {{#each user.userBeers}}
+                    <div class="added-container">
+                        {{!-- <a href="/beer-description/{{this._id}}" class="beer-link">See beer description</a> --}}
+                        <a href="/profile/{{this._id}}/edit-beer">
+                            <img src="{{this.image_url}}" alt="image" class="img-beers">
+                            <div>
                                 <p>{{this.name}}</p>
+ 
+                                {{#if this.beerType}}
                                 <p>Beer Type: {{this.beerType}}</p>
-                                <p>Alc. {{this.alcoholVol}}</p>
-                                <p>Rate: {{this.rating}}/5</p>
+                                {{/if}}
+ 
+                                <p>Alc. {{this.alcoholVol}} %</p>
+ 
+                                {{#if this.country}}
                                 <p>Origin: {{this.country}}</p>
-
+                                {{/if }}
+ 
+                                {{#if this.brewery}}
+                                <p>Brewery: {{this.brewery}}</p>
+                                {{/if }}
                             </div>
-
-                            <div class="block-added-infos">
-                                
-                                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
-                                
-                            </div>
-                        </div>
-
-                </a>
+                            <div>
+                             {{!-- <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a> --}}
+                             <a href="/profile/{{this._id}}/edit-beer"><button>Edit Beer</button></a>
+                             </div>
+                        </a>
+                    </div>
                 {{/each}}
 
-            </details>
-        </article>
+                </details>
+            </article>
 
-</section>
+        </section>
 
-<section class="section-added-infos">
-        <article class="container-added-infos">
-            <details>
-                <summary>Added Reviews</summary>
-                <div class="block-added-infos">
-                    {{#each user.userReviews}}
+        <section class="section-added-infos">
+            <article class="container-added-infos">
+                <details>
+                    <summary>Added Reviews</summary>
+                    <div class="block-added-infos">
+                        {{#each user.userReviews}}
 
-
-                    <div>
-                        {{!-- class="beer-container" --}}
 
                         <div>
-                            {{!-- class="beer-attributes" --}}
-                            <p>{{this.beerId}}</p>
-                            <p> "{{this.review}}"</p>
-                            <p>{{this.rating}}/5</p>
-                            <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
+                            {{!-- class="beer-container" --}}
+
+                            <div>
+                                {{!-- class="beer-attributes" --}}
+                                <p>{{this.beer.name}}</p>
+                                <p> "{{this.review}}"</p>
+                                <p>{{this.rating}}/5</p>
+                                <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
+                            </div>
                         </div>
+
+
+                        </a>
+                        {{/each}}
                     </div>
-
-
-                    </a>
-                    {{/each}}
-                </div>
-            </details>
-        </article>
-    </section>
+                </details>
+            </article>
+        </section>
