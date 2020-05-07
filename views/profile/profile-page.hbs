@@ -67,10 +67,12 @@
 
     <section class="section-added-infos">
         <article class="container-added-infos">
-            <details>
+            <details style="display:none"></details>
+            <details style="display:none">
                 <summary>Added Beers</summary>
 
                 {{#each user.userBeers}}
+
                 <a href="/profile/{{this._id}}/edit-beer">
                     <div>
                         <img src="{{this.image_url}}" alt="image" class="img-beers">
@@ -90,12 +92,39 @@
 
                 </a>
                 {{/each}}
+
             </details>
         </article>
 
+        <article class="container-added-infos">
+            <details style="display:none"></details>
+            <details>
+                <summary>Added Beers</summary>
 
+                {{#each user.userBeers}}
 
+                <a href="/profile/{{this._id}}/edit-beer">
+                    <div>
+                        <img src="{{this.image_url}}" alt="image" class="img-beers">
+                        <div>
+                            {{!-- class="beer-attributes" --}}
 
+                            <h1>USE THE SAME FORMATING THAN ALL BEERS <h1>
+                                    <p>{{this.name}}</p>
+                                    <p>{{this.beerType}}</p>
+                                    <p>{{this.alcoholVol}}</p>
+                                    <p>{{this.rating}}</p>
+                                    <p>{{this.country}}</p>
+                                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
+
+                        </div>
+                    </div>
+
+                </a>
+                {{/each}}
+
+            </details>
+        </article>
 
 
         <article class="container-added-infos">
@@ -111,8 +140,8 @@
                     <div>
                         {{!-- class="beer-attributes" --}}
                         <p>{{this.beerId}}</p>
-                        <p>{{this.review}}</p>
-                        <p>{{this.rating}}</p>
+                        <p> "{{this.review}}"</p>
+                        <p>{{this.rating}}/5</p>
                         <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
                     </div>
                 </div>

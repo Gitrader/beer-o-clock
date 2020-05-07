@@ -30,16 +30,16 @@ authRouter.post("/signup", (req, res, next) => {
     return; // stops the execution of the function furhter
   }
   // 2.2 Verify the password strength
-  // const passwordStrength = zxcvbn(password).score;
+  const passwordStrength = zxcvbn(password).score;
 
-  // console.log("zxcvbn(password) :>> ", zxcvbn(password));
-  // console.log("passwordStrenth :>> ", passwordStrength);
-  // if (passwordStrength < 4) {
-  //   res.render("auth-views/signup-form"
-  //   //, {errorMessage: zxcvbn(password).feedback.warning,}
-  //   );
-  //   return;
-  // }
+  console.log("zxcvbn(password) :>> ", zxcvbn(password));
+  console.log("passwordStrenth :>> ", passwordStrength);
+  if (passwordStrength < 4) {
+    res.render("auth-views/signup-form"
+    , {errorMessage: "This password is not safe : " + zxcvbn(password).feedback.suggestions[0] + " Please enter a new one"}
+    );
+    return;
+  }
   // 3. Check if the username is not taken
   User.findOne({ username })
     .then((userObj) => {

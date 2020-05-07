@@ -10,7 +10,7 @@ const authRouter = require("./routes/auth");
 require("dotenv").config()
 require("./bin/seeds")
 
-require('dotenv').config();
+
 
 const mongoose = require("mongoose");
 
@@ -33,7 +33,7 @@ var app = express();
 //
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

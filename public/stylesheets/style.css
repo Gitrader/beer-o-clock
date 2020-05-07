@@ -279,6 +279,8 @@ textarea {
 }
 
 
+
+
 .section-added-infos{
   display:flex;
   justify-content: center;
@@ -288,7 +290,6 @@ textarea {
 .section-added-infos .container-added-infos{
   margin-left: 10rem;
 }
-
 
 
 /* meter {
