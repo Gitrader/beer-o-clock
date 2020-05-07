@@ -16,7 +16,7 @@ body {
   font-family: "Open Sans", Arial, sans-serif;
   min-height: 100vh;
   padding-bottom: 3rem;
-} 
+}
 
 /* body {
   font-family: "Open Sans", Arial, sans-serif;
@@ -25,9 +25,6 @@ body {
   color: #262626;
   padding-bottom: 3rem;
 } */
-
-
-
 
 /* .container{
   display: flex;
@@ -92,7 +89,7 @@ form {
   display: flex;
   justify-content: space-between;
 }
-  /* .checkbox{
+/* .checkbox{
   border: none;
   border-radius: 3px;
   height: 35px;
@@ -233,49 +230,46 @@ form button {
   line-height: 0.2rem;
 }
 
-.added-container-review{
+.added-container-review {
   border: 1px solid rgb(227, 94, 37);
   border-radius: 5px;
-  margin:3rem;
+  margin: 3rem;
   /* padding: 3rem; */
   text-align: center;
 
   padding: 15px;
   margin: 25px 0 15px;
-  background-color:white;
+  background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
-          box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
-
+  box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
 }
 
-.added-container{
+.added-container {
   border: 1px solid rgb(227, 94, 37);
-  color:  black;
+  color: black;
   border-radius: 5px;
-  margin:2rem;
+  margin: 2rem;
   text-align: center;
 
   padding: 15px;
   margin: 25px 0 15px;
-  background-color:white;
+  background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
-          box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
+  box-shadow: 0px 1px 2px 0px rgb(227, 94, 37);
 }
 
-.added-container img{
-  margin: 0 auto ;
-  margin-top:1rem;
+.added-container img {
+  margin: 0 auto;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
   width: 10%;
-
 }
 
-.added-container button{
+.added-container button {
   margin-top: 2rem;
-  margin-bottom:2rem;
-
+  margin-bottom: 2rem;
 }
 
 .beer-link {
@@ -327,65 +321,46 @@ textarea {
   color: #2f4858;
 }
 
-
-
-
-.section-added-infos{
-  display:flex;
+.section-added-infos {
+  display: flex;
   justify-content: center;
   margin-right: 2rem;
 }
 
-.section-added-infos .container-added-infos{
+.section-added-infos .container-added-infos {
   margin-left: 10rem;
-  
 }
-.block-added-infos{
+.block-added-infos {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
- 
 }
-.block-added-infos a{
-  text-decoration:none;
-  color:black;
+.block-added-infos a {
+  text-decoration: none;
+  color: black;
 }
 
-.reviews{
+.reviews {
   text-align: center;
-  
 }
 
-.review-description{
+.review-description {
   border: 1px solid black;
-  
-  width:30%;
+
+  width: 30%;
   margin: 0 auto;
   margin-top: 2rem;
-  
 }
 
-
-.beer-description-container{
-
-}
-
-
-
-.beer-description{
-  display:flex;
+.beer-description {
+  display: flex;
   justify-content: center;
 }
-.beer-description img{
-  width:5%;
-  margin-right:4rem;
-  }
-
-
-
-
+.beer-description img {
+  width: 5%;
+  margin-right: 4rem;
+}
 
 /* meter {
   
@@ -401,7 +376,6 @@ textarea {
   background: none;
   background-color: rgba(0, 0, 0, 0.1);
 } */
-
 
 /* meter::-webkit-meter-bar {
   background: none;
@@ -426,12 +400,12 @@ meter[value="4"]::-moz-meter-bar { background: green; }
   margin-top: 1em;
 } */
 
-@media (min-width:480px) {
+@media (min-width: 480px) {
   /* smartphones, Android phones, landscape iPhone */
   #user-info {
     display: flex;
     flex-direction: column;
-    justify-content : center;
+    justify-content: center;
   }
 
   #user-info .container-info {
@@ -454,7 +428,6 @@ meter[value="4"]::-moz-meter-bar { background: green; }
   /* hi-res laptops and desktops */
 }
 
-
 /* Base Styles */
 
 :root {
@@ -467,11 +440,9 @@ meter[value="4"]::-moz-meter-bar { background: green; }
   box-sizing: border-box;
 }
 
-
-
-/* img {
+.img-profile {
   display: block;
-} */
+}
 
 .container {
   max-width: 93.5rem;
@@ -508,6 +479,7 @@ meter[value="4"]::-moz-meter-bar { background: green; }
   justify-content: center;
   align-items: center;
   margin-right: 3rem;
+  margin-top:5rem;
 }
 
 .profile-image img {
@@ -540,10 +512,8 @@ meter[value="4"]::-moz-meter-bar { background: green; }
   margin-left: 2rem;
   background-color: #fafafa;
   text-decoration: none;
-  color:black;
+  color: black;
 }
-
-
 
 .profile-stats {
   margin-top: 2.3rem;
@@ -568,11 +538,7 @@ meter[value="4"]::-moz-meter-bar { background: green; }
   margin-top: 0.5rem;
 }
 
-.profile-real-name,
 .profile-stat-count,
 .profile-edit-btn {
   font-weight: 600;
 }
-
-
-
