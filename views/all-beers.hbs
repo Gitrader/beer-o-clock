@@ -2,12 +2,9 @@
 
 <h1 class="title">ALL BEERS PAGE</h1>
 
-
-
 <a href="/beer-description">Beer Description page</a>
 
 {{#each allBeers}}
-
 <article>
 
     <div class="beer-container">
@@ -16,14 +13,18 @@
             <div class="beer-attributes">
                 <p>{{this.name}}</p>
 
+                {{#if this.beerType}}
                 <p>Beer Type: {{this.beerType}}</p>
+                {{/if}}
 
                 <p>Alc. {{this.alcoholVol}} %</p>
 
                 {{#if this.country}}
-                <p>Country: {{this.country}}</p>
-                {{else}}
-                <p>Unknown origin</p>
+                <p>Origin: {{this.country}}</p>
+                {{/if }}
+
+                {{#if this.brewery}}
+                <p>Brewery: {{this.brewery}}</p>
                 {{/if }}
             </div>
     </div>

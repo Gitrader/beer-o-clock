@@ -13,8 +13,6 @@
     <div>
         {{#if beer.beerType}}
         <p>Beer Type: {{beer.beerType}}</p>
-        {{else}}
-        <p>No beer type specified</p>
         {{/if}}
 
         <p>Alc. {{beer.alcoholVol}} %</p>
@@ -23,19 +21,13 @@
         <p> {{beer.description}} </p>
         {{/if}}
 
-        <p>EBU: {{beer.EBU}} </p>
-
         {{#if beer.country}}
         <p>Origin: {{beer.country}}</p>
-        {{else}}
-        <p>Unknown origin</p>
         {{/if}}
 
         {{#if beer.brewery}}
-        <p>Origin: {{beer.brewery}}</p>
-        {{else}}
-        <p>Unknown brewery</p>
-        {{/if}}
+        <p>Brewery: {{beer.brewery}}</p>
+        {{/if }}
 
         <p>Malts: </p>
         {{#each beer.malt}}
@@ -50,6 +42,17 @@
             <li> {{this}} </li>
         </ul>
         {{/each}}
+
+        <p>EBU: {{beer.EBU}} </p>
+
+        {{#if beer.purchasePlace}}
+        <p>Purchased from: {{beer.purchasePlace}}</p>
+        {{/if }}
+
+        {{#if beer.purchaseCountry}}
+        <p>Purchased in: {{beer.purchaseCountry}}</p>
+        {{/if }}
+
     </div>
 
 </div>
