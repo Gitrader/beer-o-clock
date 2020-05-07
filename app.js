@@ -10,7 +10,7 @@ const authRouter = require("./routes/auth");
 require("dotenv").config()
 require("./bin/seeds")
 
-require('dotenv').config();
+
 
 const mongoose = require("mongoose");
 
