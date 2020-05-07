@@ -352,6 +352,41 @@ textarea {
   text-decoration:none;
   color:black;
 }
+
+.reviews{
+  text-align: center;
+  
+}
+
+.review-description{
+  border: 1px solid black;
+  
+  width:30%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  
+}
+
+
+.beer-description-container{
+
+}
+
+
+
+.beer-description{
+  display:flex;
+  justify-content: center;
+}
+.beer-description img{
+  width:5%;
+  margin-right:4rem;
+  }
+
+
+
+
+
 /* meter {
   
   -webkit-appearance: none;

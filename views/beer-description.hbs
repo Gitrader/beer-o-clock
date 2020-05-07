@@ -1,24 +1,20 @@
-<h1>Beer Description</h1>
+<h1 class="title">Beer Description</h1>
 <br>
 
-{{!-- THIS WORKS!!! --}}
-{{#if liked}}
-<form action="/beer-description/{{beer._id}}/unlike" method="post">
-    <button type="submit">Click to unlike beer</button>
-</form>
-{{else}}
-<form action="/beer-description/{{beer._id}}/like" method="post">
-    <button type="submit">Like this beer!</button>
-</form>
-{{/if}}
+
 
 {{!-- add somewhere if you have liked the beer or not! if it's not in the beer model, it will need more work! --}}
 
-<div> {{!-- add class here if needed --}}
-    <h4>{{beer.name}}</h4>
+
+<section class="beer-description">
+ {{!-- add class here if needed --}}
+    
     <img src=" {{beer.image_url}} " alt="No image available">
 
-    <div>
+    <div class="beer-description-container">
+
+        <h2>{{beer.name}}</h2>
+
         {{#if beer.beerType}}
         <p>Beer Type: {{beer.beerType}}</p>
         {{/if}}
@@ -61,19 +57,48 @@
         <p>Purchased in: {{beer.purchaseCountry}}</p>
         {{/if }}
 
-    </div>
+    
 
 </div>
 
-<a href="/beer-description/{{beer._id}}/add-review">Add review</a>
+</section>
 
-<details>
+{{!-- THIS WORKS!!! --}}
+{{#if liked}}
+<form action="/beer-description/{{beer._id}}/unlike" method="post">
+    <button type="submit">Click to unlike beer</button>
+</form>
+{{else}}
+<form action="/beer-description/{{beer._id}}/like" method="post">
+    <button type="submit">Like this beer!</button>
+</form>
+{{/if}}
+
+
+
+
+
+
+{{!-- <a href="/beer-description/{{beer._id}}/add-review">Add review</a> --}}
+
+
+<form action="/beer-description/{{beer._id}}/add-review" method="get" style="margin-top:0.2rem;">
+    <button type="submit" >Add review</button>
+</form>
+
+
+
+<details class="reviews">
     <summary>Reviews</summary>
+    
     {{#each review}}
-    <div>
+    <div class="review-description">
+       
         <p>" {{this.review}} "</p>
-        <p> {{this.rating}}/5</p>
+        <p> Rate: {{this.rating}}/5</p>
         {{!-- add user to review? --}}
+        
     </div>
     {{/each}}
+    
 </details>
