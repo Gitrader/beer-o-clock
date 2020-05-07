@@ -330,7 +330,7 @@ siteRouter.post(
         const userId = req.session.currentUser._id;
         const { name, city, country, beerPreference } = req.body;
         console.log("req.body", req.body);
-        return User.update(
+        return User.updateOne(
           { _id: userId },
           {
             name,

@@ -1,9 +1,9 @@
-<h1>Edit profile</h1>
+<h1 class="title">Edit profile</h1>
 
 <form action="/profile/{{user._id}}/edit-profile/" method="POST" enctype="multipart/form-data">
 
- <label for=''>Select an image :</label>
-  <img src={{user.profilePicture}} alt="profile picture">
+ <label for='' >Select an image :</label>
+  <img src={{user.profilePicture}} alt="profile picture" style="width:20%;">
   <input type="file" name="profilePicture"  value={{user.profilePicture}}/>
 
   <label for=''>Username:</label>
