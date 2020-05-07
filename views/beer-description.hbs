@@ -1,8 +1,16 @@
 <h1>Beer Description</h1>
 <br>
+
+{{!-- THIS WORKS!!! --}}
+{{#if liked}}
+<form action="/beer-description/{{beer._id}}/unlike" method="post">
+    <button type="submit">Click to unlike beer</button>
+</form>
+{{else}}
 <form action="/beer-description/{{beer._id}}/like" method="post">
     <button type="submit">Like this beer!</button>
 </form>
+{{/if}}
 
 {{!-- add somewhere if you have liked the beer or not! if it's not in the beer model, it will need more work! --}}
 
@@ -57,17 +65,14 @@
 
 </div>
 
-
-
 <a href="/beer-description/{{beer._id}}/add-review">Add review</a>
-
-
 
 <details>
     <summary>Reviews</summary>
     {{#each review}}
     <div>
-        <p> {{this.review}}</p>
+        <p>" {{this.review}} "</p>
+        <p> {{this.rating}}/5</p>
         {{!-- add user to review? --}}
     </div>
     {{/each}}

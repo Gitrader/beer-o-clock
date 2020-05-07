@@ -3,36 +3,44 @@
 <h1 class="title">ALL BEERS PAGE</h1>
 
 {{!-- form for showing beers --}}
-<form action="/all-beers" method="get">
+<details>
+    <summary>Filter beer selection:</summary>
+    <form action="/all-beers" method="get">
 
-    <label for="country">Country: </label>
-    <input name="country" id="country" type="text">
+        <label for="name">Name: </label>
+        <input name="name" id="name" type="text">
 
-    <select name="beerType" id="">
-        <option value="">Don't specify</option>
-        <option value="lager">Lager only</option>
-        <option value="IPA">IPA only</option>
-        <option value="pilsner">Pilsner only</option>
-        <option value="wheat beer">Wheat beer only</option>
-        <option value="witbier">Witbier only</option>
-        <option value="APA">APA only</option>
-        <option value="porter">Porter only</option>
-        <option value="stout">Stout only</option>
-        <option value="gose">Gose only</option>
-        <option value="sour">Sour only</option>
-        <option value="other">"other" beers</option>
+        <label for="country">Country: </label>
+        <input name="country" id="country" type="text">
 
-    </select>
-    <button type="submit">Filter beers!</button>
-</form>
+        <label for="brewery">Brewery: </label>
+        <input name="brewery" id="brewery" type="text">
 
-<form action="/all-beers" method="get">
-    <button type="submit">Show all</button>
-</form>
+        <label for="beerType">Beer type: </label>
+        <select name="beerType" id="">
+            <option value="">Don't specify</option>
+            <option value="lager">Lager only</option>
+            <option value="IPA">IPA only</option>
+            <option value="pilsner">Pilsner only</option>
+            <option value="wheat beer">Wheat beer only</option>
+            <option value="witbier">Witbier only</option>
+            <option value="APA">APA only</option>
+            <option value="porter">Porter only</option>
+            <option value="stout">Stout only</option>
+            <option value="gose">Gose only</option>
+            <option value="sour">Sour only</option>
+            <option value="other">Beers with type "other"</option>
+        </select>
+        <button type="submit">Filter beers!</button>
+    </form>
+
+    <form action="/all-beers" method="get">
+        <button type="submit">Show all</button>
+    </form>
+</details>
 
 {{#each allBeers}}
 <article>
-
     <div class="beer-container">
         <a href="/beer-description/{{this._id}}" class="beer-link">
             <img src="{{this.image_url}}" class="img-beers" alt="image">
@@ -53,36 +61,8 @@
                 <p>Brewery: {{this.brewery}}</p>
                 {{/if }}
             </div>
+        </a>
     </div>
-    </a>
 </article>
-</a>
+{{!-- </a> --}}
 {{/each}}
-
-
-
-
-{{!-- <article>
-            
-            <div class="beer-container">
-                <a href="/beer-description/{{this._id}}" >
-            <img src="{{this.image_url}}" class="img-beers" alt="image">
-            <div class="beer-attributes">
-                <p>{{this.name}}</p>
-                    {{#each this.beerType}} 
-                        <p>Beer Type: {{this}}</p> 
-                    {{else}}
-                        <p>No beer type specified</p> 
-                    {{/each}}
-
-                <p>Alc. {{this.alcoholVol}} %</p>
-                {{#if this.country}}
-                    <p>Country: {{this.country}}</p>
-                {{else}}
-                    <p>Unknown origin</p>
-                {{/if}}
-            </div>
-        </div>
-</a>
-        </article>
-    </a> --}}
