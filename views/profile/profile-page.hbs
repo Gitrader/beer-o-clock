@@ -33,7 +33,7 @@
 
                 </ul>
                 <div class="profile-bio">
-                    <p><span class="profile-real-name">Beer Preference</span> {{user.beerPreference}}</p>
+                    <p><span class="profile-real-name">Beer Preference:</span> {{user.beerPreference}}</p>
 
                 </div>
 
@@ -46,28 +46,12 @@
     </div>
 
 
-    {{!-- <section id="user-info">
-    <article class="container-info">
 
-        <img src="{{user.profilePicture}}" alt="profile-pic" class="img-profile">
-    </article>
-    
-<article class="container-info">
-    <p>Username: {{user.username}}</p>
-    <p>City: {{user.city}}</p>
-    <p>Country: {{user.country}}</p>
-    <p>Beer preference: {{user.beerPreference}}</p>
-    </article> --}}
-
-
-    {{!-- </section> --}}
-
-    {{!-- <section> --}}
-
+    {{!-- NOT DISPLAYED --}}
 
     <section class="section-added-infos">
         <article class="container-added-infos">
-            <details style="display:none"></details>
+
             <details style="display:none">
                 <summary>Added Beers</summary>
 
@@ -96,29 +80,41 @@
             </details>
         </article>
 
+        {{!-- NOT DISPLAYED --}}
+
+
+
+<section class="section-added-infos">
+
         <article class="container-added-infos">
-            <details style="display:none"></details>
+
             <details>
                 <summary>Added Beers</summary>
 
                 {{#each user.userBeers}}
 
                 <a href="/profile/{{this._id}}/edit-beer">
-                    <div>
+                    <div class="block-added-infos">
                         <img src="{{this.image_url}}" alt="image" class="img-beers">
                         <div>
                             {{!-- class="beer-attributes" --}}
 
-                            <h1>USE THE SAME FORMATING THAN ALL BEERS <h1>
-                                    <p>{{this.name}}</p>
-                                    <p>{{this.beerType}}</p>
-                                    <p>{{this.alcoholVol}}</p>
-                                    <p>{{this.rating}}</p>
-                                    <p>{{this.country}}</p>
-                                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
+                            
+                            <div class="block-added-infos">
+                                <p>{{this.name}}</p>
+                                <p>Beer Type: {{this.beerType}}</p>
+                                <p>Alc. {{this.alcoholVol}}</p>
+                                <p>Rate: {{this.rating}}/5</p>
+                                <p>Origin: {{this.country}}</p>
 
+                            </div>
+
+                            <div class="block-added-infos">
+                                
+                                    <a href="/profile/{{this._id}}/edit-beer"><i class="material-icons">settings</i></a>
+                                
+                            </div>
                         </div>
-                    </div>
 
                 </a>
                 {{/each}}
@@ -126,29 +122,32 @@
             </details>
         </article>
 
+</section>
 
+<section class="section-added-infos">
         <article class="container-added-infos">
             <details>
                 <summary>Added Reviews</summary>
+                <div class="block-added-infos">
+                    {{#each user.userReviews}}
 
-                {{#each user.userReviews}}
-
-
-                <div>
-                    {{!-- class="beer-container" --}}
 
                     <div>
-                        {{!-- class="beer-attributes" --}}
-                        <p>{{this.beerId}}</p>
-                        <p> "{{this.review}}"</p>
-                        <p>{{this.rating}}/5</p>
-                        <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
+                        {{!-- class="beer-container" --}}
+
+                        <div>
+                            {{!-- class="beer-attributes" --}}
+                            <p>{{this.beerId}}</p>
+                            <p> "{{this.review}}"</p>
+                            <p>{{this.rating}}/5</p>
+                            <a href="/profile/{{this._id}}/edit-review"><i class="material-icons">settings</i></a>
+                        </div>
                     </div>
+
+
+                    </a>
+                    {{/each}}
                 </div>
-
-
-                </a>
-                {{/each}}
             </details>
         </article>
     </section>

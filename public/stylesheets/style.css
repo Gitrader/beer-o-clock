@@ -289,9 +289,19 @@ textarea {
 
 .section-added-infos .container-added-infos{
   margin-left: 10rem;
+  
 }
-
-
+.block-added-infos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+ 
+}
+.block-added-infos a{text-decoration:none;
+  color:black;
+}
 /* meter {
   
   -webkit-appearance: none;
