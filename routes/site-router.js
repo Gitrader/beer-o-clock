@@ -19,11 +19,42 @@ require("dotenv").config();
 // probably should be able to click the beers to go to description too..
 // GET
 siteRouter.get("/all-beers", isLoggedIn, (req, res, next) => {
-  Beer.find()
-    .then((allBeers) => {
-      res.render("all-beers", { allBeers: allBeers });
-    })
-    .catch((err) => console.log(err));
+  console.log("req.query unfiltered ", req.query)
+  //Object.keys(req.query).length !== 0 
+  if (Object.keys(req.query).length !== 0) {
+    //const {country, beerType} = req.query
+    const userQuery = {...req.query} // { country: '', beerType: 'lager' }
+    console.log("query: ", userQuery)
+    // console.log("keys + values",Object.entries(userQuery))
+    // let keys = Object.keys(userQuery)
+    // console.log("keys: ",keys)
+    //let values = query.values;
+
+    // keys.forEach(key => {
+    //   if (key.value === "") { //  || key.value === null
+    //     console.log("key: ", key, "value: ", key.value)
+    //     delete userQuery.key
+    //   }      
+    // });
+    // get rid of empty values in query keys
+    for (const [key, value] of Object.entries(userQuery)) {
+      if(value === "") delete userQuery[key]
+    }
+    console.log("userQuery after delete", userQuery)
+
+    Beer.find(userQuery)
+    .then( resArray => {
+      res.render("all-beers", { allBeers: resArray }) // this way around!!
+    } )
+    .catch()
+  }
+  else {
+    Beer.find()
+      .then((allBeers) => {
+        res.render("all-beers", { allBeers: allBeers });
+      })
+      .catch((err) => console.log(err));
+  }
 });
 
 // // GET
@@ -53,12 +84,14 @@ siteRouter.get("/beer-description/:beerId", isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 
   //could add a 3rd promise to get user to handle liking on the page!
+  // return true(liked already, show unlike!) / false (not liked, show like button)
 
   Promise.all([promise1, promise2])
     .then((resultArray) => {
       res.render("beer-description", {
         beer: resultArray[0],
         review: resultArray[1],
+        //liked: resultArray[2]
       });
     })
     .catch((err) => console.log(err));
