@@ -190,6 +190,7 @@ form button {
   background-color: #ffffff;
   display: flex;
   overflow-x: auto;
+  
 }
 
 .nav__link {
@@ -207,6 +208,7 @@ form button {
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   transition: background-color 0.1s ease-in-out;
+  
 }
 
 .nav__link:hover {
@@ -361,6 +363,9 @@ textarea {
   width: 5%;
   margin-right: 4rem;
 }
+
+
+
 
 /* meter {
   
@@ -542,3 +547,11 @@ meter[value="4"]::-moz-meter-bar { background: green; }
 .profile-edit-btn {
   font-weight: 600;
 }
+
+
+
+
+
+
+
+
