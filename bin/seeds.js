@@ -95,7 +95,7 @@ function seedDatabase(beerArr) {
 
 // 1. CONNECT TO MONGOOSE
 mongoose.connect(
-    `mongodb://localhost:27017/BeerOclock`,
+    `mongodb://localhost:27017/${process.env.DB_NAME}`,
     {useNewUrlParser: true, useUnifiedTopology: true}
 )
     .then((x) => {
