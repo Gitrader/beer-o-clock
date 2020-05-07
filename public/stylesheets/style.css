@@ -12,9 +12,17 @@ a {
 
  body {
   margin: 0 0 55px 0;
-  background: cornsilk;
+  background-color:rgb(218, 219, 175);
   font-family: sans-serif;
   
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: 370px; */
 }
 
 /* .title{

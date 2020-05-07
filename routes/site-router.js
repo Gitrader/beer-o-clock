@@ -260,7 +260,7 @@ siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
 });
 
 // GET
-siteRouter.get("/profile/edit-profile", isLoggedIn, (req, res, next) => {
+siteRouter.get("/profile/edit-profile/", isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser;
   User.findById(user._id)
 
@@ -280,20 +280,39 @@ siteRouter.post(
   isLoggedIn,
   parser.single("profilePicture"),
   (req, res) => {
-    const user = req.session.currentUser;
-    const { name, city, country, beerPreference } = req.body;
-    const profile_image_url = req.file.secure_url;
-    User.updateOne(
-      { _id: userId },
-      {
-        name,
-        profilePicture: profile_image_url,
-        city,
-        country,
-        beerPreference,
-      }
-    )
-      .then(() => {
+    const userId = req.session.currentUser._id;
+    console.log("userId",userId)
+
+    // const profile_image_url = req.file.secure_url;
+    User.findById(userId)
+      //Start//
+      .then((user) => {
+        let previousProfileImage = user.profilePicture;
+        let profile_image_url = req.file
+          ? req.file.secure_url
+          : previousProfileImage;
+        return profile_image_url;
+      })
+      .then((profile_image_url) => {
+        const userId = req.session.currentUser._id;
+        const { name, city, country, beerPreference } = req.body;
+        console.log("req.body", req.body);
+        return User.update(
+          { _id: userId },
+          {
+            name,
+            profilePicture: profile_image_url,
+            city,
+            country,
+            beerPreference,
+          },
+          {
+            new: true,
+          }
+        );
+      })
+      .then((updatedUser) => {
+        console.log("updated user", updatedUser);
         res.redirect(`/profile/profile-page`);
       })
       .catch((err) => console.log(err));
@@ -356,8 +375,8 @@ siteRouter.post(
         } = req.body;
         console.log("req.body", req.body);
         console.log("beerID", beerId);
-        const maltsArr=malt.split(",")
-        const hopsArr=hops.split(",")
+        const maltsArr = malt.split(",");
+        const hopsArr = hops.split(",");
         return Beer.update(
           { _id: beerId },
           {
@@ -369,8 +388,8 @@ siteRouter.post(
             alcoholVol,
             country,
             description,
-            malt : maltsArr,
-            hops : hopsArr,
+            malt: maltsArr,
+            hops: hopsArr,
             EBU,
             purchasePlace,
             purchaseCountry,
@@ -443,15 +462,15 @@ siteRouter.post("/profile/:reviewId/edit-review/", isLoggedIn, (req, res) => {
 
 // POST DELETE BEER! will be a form inside edit-beer
 siteRouter.post("/profile/:beerId/delete", isLoggedIn, (req, res, next) => {
-  console.log("heeeeey from get delete route")
+  console.log("heeeeey from get delete route");
   const { beerId } = req.params;
 
   Beer.findByIdAndRemove(beerId)
-  .then(() => {
-    console.log("this is after deleting a beer!")
-    res.redirect("/profile/profile-page")
-  })
-  .catch((err) => console.log("error deleting beer: ",err))
-})
+    .then(() => {
+      console.log("this is after deleting a beer!");
+      res.redirect("/profile/profile-page");
+    })
+    .catch((err) => console.log("error deleting beer: ", err));
+});
 
 module.exports = siteRouter;
