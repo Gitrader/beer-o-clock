@@ -33,7 +33,7 @@ var app = express();
 //
 
 mongoose
-  .connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

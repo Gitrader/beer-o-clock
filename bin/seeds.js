@@ -56,7 +56,7 @@ function getBeerArray() {
 }
 
 // 1. CONNECT TO MONGOOSE
-mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
   // 2. find our DB
   .then((x) => {
     console.log(`we are Connected to DB from seeds: ${x.connections[0].name}`);
