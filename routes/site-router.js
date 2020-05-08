@@ -305,9 +305,21 @@ siteRouter.get("/profile/profile-page/", isLoggedIn, (req, res, next) => {
   User.findById(user._id)
     .populate("userBeers")
     .populate("userReviews")
+    // .populate({
+    //   path: 'userReviews',
+    //   model: 'User',
+    //   populate: [
+    //     { path: 'beerId', model: 'Beer' },
+    //   ]
+    // })
     // likedBeers can be added here too
+
     .then((user) => {
+    
       const userReviews = user.userReviews;
+      console.log("user review", userReviews)
+      
+      // return Review.find()
       res.render("profile/profile-page", { user: user });
     })
     .catch((err) => {
