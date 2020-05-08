@@ -10,10 +10,12 @@ a {
 
 /* Place the navbar at the bottom of the page, and make it stick */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,500;1,700;1,900&display=swap');
+
 body {
   margin: 0 0 55px 0;
   background-color: rgb(218, 219, 175);
-  font-family: "Open Sans", Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   min-height: 100vh;
   padding-bottom: 3rem;
 }
@@ -62,8 +64,9 @@ h1 {
 
 .title {
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  color:rgb(47, 72, 88);
 }
 .login {
   display: flex;
@@ -254,6 +257,7 @@ details {
   width: 50%;
   border: 2px solid rgb(100, 160, 126);
   border-radius: 5px;
+  background-color: white;
 
 }
 
@@ -269,12 +273,15 @@ details {
 }
 
 .beer-flex div {
-  width: 50%;
+  margin-top:2rem;
+  margin-bottom:2rem;
+  width: 40%;
   padding: 0 5%;
 }
 
 .beer-flex img {
-  width: 45%;
+  width:20%;
+  /* before width: 45%; */
   /* height: 10%; */
 }
 .beer-link {
@@ -366,10 +373,11 @@ textarea {
 
 .review-description {
   border: 1px solid black;
-
+border-radius: 5px;
   width: 30%;
   margin: 0 auto;
   margin-top: 2rem;
+  background-color: white;
 }
 
 .beer-description {
