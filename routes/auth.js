@@ -56,7 +56,6 @@ authRouter.post("/signup", (req, res, next) => {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashedPassword = bcrypt.hashSync(password, salt);
 
- 
         // 5. Create new user in DB, saving the encrypted password
         User.create({
           username,
@@ -77,7 +76,7 @@ authRouter.post("/signup", (req, res, next) => {
           });
       }
     })
-    .catch((err) => next(err));
+    .catch((err) => console.log("findone in post signup",err));
 
   // X.  Catch errors coming from calling to User collection
 });
