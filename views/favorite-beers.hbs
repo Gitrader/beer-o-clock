@@ -1,32 +1,36 @@
 <h1 class="title">Favorite beers</h1>
 
 {{#each likedBeers}}
-<a href="/beer-description/{{this._id}}">
-    <article>
-        <div class="beer-container">
-            <img src="{{this.image_url}}" alt="image">
-            <div class="beer-attributes">
-                <p>{{this.name}}</p>
+<a href="/beer-description/{{this._id}}" class="beer-link">
+    <div class="beer-flex">
+        <div>
+            <img src="{{this.image_url}}" class="img-beers" alt="image">
+        </div>
+
+        <div>
+            <ul>
+                <li>
+                    <h3>{{this.name}}</h3>
+                </li>
 
                 {{#if this.beerType}}
-                <p>Beer Type: {{this.beerType}}</p>
+                <li>Beer Type: {{this.beerType}}</li>
                 {{/if}}
 
-                <p>Alc. {{this.alcoholVol}} %</p>
+                <li>Alc. {{this.alcoholVol}} %</li>
 
                 {{#if this.country}}
-                <p>Origin: {{this.country}}</p>
-                {{/if}}
+                <li>Origin: {{this.country}}</li>
+                {{/if }}
 
                 {{#if this.brewery}}
-                <p>Brewery: {{this.brewery}}</p>
+                <li>Brewery: {{this.brewery}}</li>
                 {{/if }}
-            </div>
-        </div>
-    </article>
-</a>
 
-{{!-- original setup that works <div>
-    {{this.name}}
-</div> --}}
+
+            </ul>
+        </div>
+
+    </div>
+</a>
 {{/each}}

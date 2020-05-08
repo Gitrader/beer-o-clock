@@ -233,7 +233,12 @@ form button {
 /* ALL-BEERS */
 /* FILTER */
 .filter-beers {
+  width: 50%;
+  margin: auto;
+}
 
+details {
+  font-size: 2em;
 }
 
 /*                  starting here all-beers beer-containers */
